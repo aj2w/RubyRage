@@ -1,3 +1,7 @@
 canvas {
   border: 1px solid black;
 }
+
+.form_area {
+  display: none;
+}

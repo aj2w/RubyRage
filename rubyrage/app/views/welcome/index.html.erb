@@ -1,14 +1,32 @@
-<p>Hello</p>
+<DOCTYPE! html>
+<html>
+<head>
+  <title>
+    <%= javascript_include_tag "loginform" %>
+  </title>
+</head>
 
-<p>Press button and it will turn into log in input</p>
+<body>
+  <h1>Ruby Rage</h1>
+  <!-- <p>Press button and it will turn into log in input</p> -->
 
-<%= link_to "Sign in", new_session_path %>
+  <button class="play">Play!</button>
 
-<br>TEMP LINK BELOW<br>
+  <div class="form_area">
+    <%= form_tag sessions_path do %>
+    <p>
+      <%= label_tag :email %>
+      <%= text_field_tag :email, params[:email]%>
+    </p>
+    <p>
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+    </p>
+    <p><%= submit_tag "Sign in"%></p>
+    <% end %>
+  </div>
 
-<%= link_to "Play game", games_dashboard_path %>
 
+</body>
+</html>
 
-
-<!-- this page will prompt for log in, and then redirect to dashboard -->
-<!-- user can select single or multiplayer on the dashboard -->
