@@ -4,4 +4,8 @@ class GamesController < ApplicationController
 
   end
 
+  def single
+
+  end
+
 end

@@ -1,2 +1,17 @@
-<p>Single Player</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RubyRage</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+<!--   // <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  // <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script> -->
+</head>
+<body>
+  <p>Rage against the Rubes</p>
 
+  <canvas width='300' height='600'></canvas>
+  <%= javascript_include_tag "rubyrage" %>
+  <%= javascript_include_tag "game_setup" %>
+  <%= javascript_include_tag "game_render" %>
+</body>
+</html>
