@@ -1,4 +1,6 @@
-<p>Welcome to the game dashboard</p>
+<p>Welcome to the game dashboard, <% if @current_user %>
+   <%= @current_user.email %>
+<% end %></p>
 
 <p>Select single or multiplayer</p>
 

@@ -6,6 +6,9 @@
 </head>
 <body>
   <p>INSERT TITLE</p>
+<% if @current_user %>
+   <%= @current_user.email %>
+<% end %>
 
   <canvas width='300' height='600'></canvas>
   <%= javascript_include_tag "rubyrage" %>
@@ -13,3 +16,4 @@
   <%= javascript_include_tag "game_render" %>
 </body>
 </html>
+
