@@ -3,8 +3,7 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
 
   attr_accessible :email, :password, :password_confirmation, :is_admin
-  has_many :reviews
-  has_many :vendors
+  has_one :stat
 
   validates :password, confirmation: true
   validates :password, presence: true, on: :create

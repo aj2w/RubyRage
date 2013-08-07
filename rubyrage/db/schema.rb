@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130807174205) do
+ActiveRecord::Schema.define(:version => 20130807175601) do
+
+  create_table "stats", :force => true do |t|
+    t.string   "times_played"
+    t.string   "total_score"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username"
