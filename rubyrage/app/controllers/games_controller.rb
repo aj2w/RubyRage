@@ -6,4 +6,7 @@ class GamesController < ApplicationController
   def single
   end
 
+  def multi
+  end
+
 end
