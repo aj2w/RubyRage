@@ -8543,7 +8543,11 @@ Processing by GamesController#single as HTML
   Rendered games/single.html.erb within layouts/application (2.1ms)
   Rendered layouts/_navbar.html.erb (0.5ms)
 Completed 200 OK in 17ms (Views: 17.1ms | ActiveRecord: 0.0ms)
+<<<<<<< HEAD
+Connecting to database specified by database.yml
+=======
 >>>>>>> f4573c420fef3bb09ec2de115601350b997164cc
+<<<<<<< HEAD
 Connecting to database specified by database.yml
 Connecting to database specified by database.yml
 Connecting to database specified by database.yml
@@ -9661,3 +9665,6 @@ Processing by GamesController#single as HTML
   Rendered games/single.html.erb within layouts/application (0.9ms)
   Rendered layouts/_navbar.html.erb (0.4ms)
 Completed 200 OK in 16ms (Views: 15.2ms | ActiveRecord: 0.1ms)
+=======
+>>>>>>> d1541f83f2cf299e4e7acb80323161efafc7585f
+>>>>>>> 19b79e6968ac0977420e89bd470ed616c49e63db
