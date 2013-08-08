@@ -65,3 +65,11 @@ nav.top-bar {
 #rubymon-set {
   display: none;
 }
+
+#gamebackground {
+  background: url('stains_surface.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
