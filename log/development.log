@@ -4442,3 +4442,407 @@ Compiled loginform.js  (0ms)  (pid 53802)
 Compiled application.js  (17ms)  (pid 53802)
   Rendered layouts/_navbar.html.erb (2.0ms)
 Completed 200 OK in 262ms (Views: 181.4ms | ActiveRecord: 30.8ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:00:31 -0400
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (91.5ms)
+Compiled jquery.js  (4ms)  (pid 87120)
+Compiled jquery_ujs.js  (0ms)  (pid 87120)
+Compiled application.js  (583ms)  (pid 87120)
+  Rendered layouts/_navbar.html.erb (1.4ms)
+Completed 200 OK in 1047ms (Views: 1046.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2013-08-08 13:00:38 -0400
+Processing by UsersController#new as HTML
+  Rendered users/new.html.erb within layouts/application (74.0ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 191ms (Views: 90.0ms | ActiveRecord: 9.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:00:55 -0400
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.5ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 100ms (Views: 99.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/log_out" for 127.0.0.1 at 2013-08-08 13:01:00 -0400
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:01:00 -0400
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.1ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 13ms (Views: 12.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2013-08-08 13:01:01 -0400
+Processing by UsersController#new as HTML
+  Rendered users/new.html.erb within layouts/application (2.0ms)
+  Rendered layouts/_navbar.html.erb (24.7ms)
+Completed 200 OK in 39ms (Views: 38.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:11:08 -0400
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 14ms (Views: 14.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2013-08-08 13:11:09 -0400
+Processing by UsersController#new as HTML
+  Rendered users/new.html.erb within layouts/application (2.7ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 25ms (Views: 15.6ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2013-08-08 13:11:17 -0400
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Z71iC3fO5Qrw0xVICW4OLMqQwOMAqV7kEVJ6JhGdnhs=", "user"=>{"email"=>"thomas.whyyou@ymail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (25.1ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'thomas.whyyou@ymail.com' LIMIT 1
+Binary data inserted for `string` type on column `password_hash`
+Binary data inserted for `string` type on column `password_salt`
+  [1m[36mSQL (100.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "is_admin", "password", "password_hash", "password_salt", "updated_at", "username") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["created_at", Thu, 08 Aug 2013 17:11:17 UTC +00:00], ["email", "thomas.whyyou@ymail.com"], ["is_admin", nil], ["password", nil], ["password_hash", "$2a$10$0HMpYMBBzc0oZPXaPHNQUOh82eLw6wOUE52r0syepQpRMXY.5wX1O"], ["password_salt", "$2a$10$0HMpYMBBzc0oZPXaPHNQUO"], ["updated_at", Thu, 08 Aug 2013 17:11:17 UTC +00:00], ["username", nil]]
+  [1m[35m (37.9ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 349ms (ActiveRecord: 163.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:11:17 -0400
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.2ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 13ms (Views: 13.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2013-08-08 13:11:26 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Z71iC3fO5Qrw0xVICW4OLMqQwOMAqV7kEVJ6JhGdnhs=", "email"=>"thomas.whyyou@ymail.com", "password"=>"[FILTERED]", "commit"=>"Sign in"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'thomas.whyyou@ymail.com' LIMIT 1[0m
+Redirected to http://localhost:3000/games/dashboard
+Completed 302 Found in 150ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/games/dashboard" for 127.0.0.1 at 2013-08-08 13:11:26 -0400
+Processing by GamesController#dashboard as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/dashboard.html.erb within layouts/application (0.3ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 15ms (Views: 13.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:11:28 -0400
+Processing by GamesController#single as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (195.4ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 213ms (Views: 211.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:23:35 -0400
+Processing by GamesController#single as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (17.1ms)
+  Rendered layouts/_navbar.html.erb (0.6ms)
+Completed 200 OK in 111ms (Views: 108.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:23:39 -0400
+Processing by GamesController#single as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (1.4ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:23:43 -0400
+Processing by GamesController#single as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (1.2ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 14ms (Views: 12.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:23:56 -0400
+Processing by GamesController#single as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (1.2ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 14ms (Views: 12.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:24:00 -0400
+Processing by GamesController#single as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (1.1ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 14ms (Views: 12.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/" for 127.0.0.1 at 2013-08-08 13:24:11 -0400
+
+ActionController::RoutingError (No route matches [GET] "/games"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  quiet_assets (1.0.2) lib/quiet_assets.rb:18:in `call_with_quiet_assets'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /Users/yuthomas/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /Users/yuthomas/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /Users/yuthomas/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /Users/yuthomas/.rvm/gems/ruby-1.9.3-p429/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.4ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2013-08-08 13:24:15 -0400
+
+ActionController::RoutingError (No route matches [GET] "/games"):
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  quiet_assets (1.0.2) lib/quiet_assets.rb:18:in `call_with_quiet_assets'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /Users/yuthomas/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /Users/yuthomas/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /Users/yuthomas/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /Users/yuthomas/.rvm/gems/ruby-1.9.3-p429/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.5ms)
+
+
+Started GET "/games/dashboard" for 127.0.0.1 at 2013-08-08 13:24:26 -0400
+Processing by GamesController#dashboard as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/dashboard.html.erb within layouts/application (0.1ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 83ms (Views: 81.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:24:28 -0400
+Processing by GamesController#single as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (1.2ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 14ms (Views: 12.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/multi" for 127.0.0.1 at 2013-08-08 13:24:30 -0400
+Processing by GamesController#multi as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/multi.html.erb within layouts/application (1.6ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 90ms (Views: 88.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:24:32 -0400
+Processing by GamesController#single as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (1.2ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:24:33 -0400
+Processing by GamesController#single as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (1.3ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 14ms (Views: 12.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:26:51 -0400
+Processing by WelcomeController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered welcome/index.html.erb within layouts/application (1.4ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 14ms (Views: 13.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:26:53 -0400
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered welcome/index.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 40ms (Views: 38.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:26:55 -0400
+Processing by WelcomeController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 39ms (Views: 37.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:30:04 -0400
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered welcome/index.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navbar.html.erb (0.3ms)
+Completed 200 OK in 39ms (Views: 38.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:30:09 -0400
+Processing by WelcomeController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered welcome/index.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navbar.html.erb (0.3ms)
+Completed 200 OK in 13ms (Views: 11.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:30:11 -0400
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 13ms (Views: 12.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:33:03 -0400
+Processing by WelcomeController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+  Rendered layouts/_navbar.html.erb (0.3ms)
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:33:04 -0400
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered welcome/index.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_navbar.html.erb (0.3ms)
+Completed 200 OK in 13ms (Views: 11.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:35:52 -0400
+Processing by WelcomeController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered welcome/index.html.erb within layouts/application (0.6ms)
+Compiled rubyrage.js  (0ms)  (pid 87120)
+Compiled application.js  (13ms)  (pid 87120)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 209ms (Views: 207.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 13:35:56 -0400
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navbar.html.erb (0.3ms)
+Completed 200 OK in 13ms (Views: 11.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/dashboard" for 127.0.0.1 at 2013-08-08 13:36:00 -0400
+Processing by GamesController#dashboard as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/dashboard.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 13ms (Views: 11.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:36:01 -0400
+Processing by GamesController#single as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (9.6ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 23ms (Views: 22.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/dashboard" for 127.0.0.1 at 2013-08-08 13:36:08 -0400
+Processing by GamesController#dashboard as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/dashboard.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 13ms (Views: 11.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/multi" for 127.0.0.1 at 2013-08-08 13:36:09 -0400
+Processing by GamesController#multi as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/multi.html.erb within layouts/application (0.9ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 14ms (Views: 12.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:36:11 -0400
+Processing by GamesController#single as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (0.5ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 13ms (Views: 11.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:36:12 -0400
+Processing by GamesController#single as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (0.4ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 13ms (Views: 12.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:36:12 -0400
+Processing by GamesController#single as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (0.4ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 49ms (Views: 47.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:36:12 -0400
+Processing by GamesController#single as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (0.4ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 38ms (Views: 37.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:36:13 -0400
+Processing by GamesController#single as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (0.4ms)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 13ms (Views: 11.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 13:37:03 -0400
+Processing by GamesController#single as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered games/single.html.erb within layouts/application (0.5ms)
+Compiled application.js  (6ms)  (pid 87120)
+  Rendered layouts/_navbar.html.erb (0.4ms)
+Completed 200 OK in 113ms (Views: 112.2ms | ActiveRecord: 0.1ms)

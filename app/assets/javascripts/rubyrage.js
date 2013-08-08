@@ -1,437 +1,482 @@
-var COLS = 6;
-var ROWS = 14;
-var board = [];
-var lose;
-var interval;
-var rensaInterval;
-var current;
-var currentX, currentY;
-var newX, newY;
-var colors = ['blue', 'yellow' ,'red', 'green', 'gray'];
-var puyocolors = [];
-var color_index =0;
+
+
+//////////////////////////////////////////////////////////////////////////////
+// PART 1: GLOBAL VARIABLES - CONSTANT
+//////////////////////////////////////////////////////////////////////////////
+
+var gameboard = $('#gameboard')[0];
+var ctxGameboard = gameboard.getContext( '2d' );
+
+var gameboardColumns = 6;
+var gameboardRows = 12;
+var gameboardWitdh = 300;
+var gameboardHeight = 480; // TODO: NEED TO MAKE THE WIDTH RESPONSIVE
+var eachColumnWidth = gameboardWitdh / gameboardColumns;
+var eachRowHeight = gameboardHeight / gameboardRows;
+
+var preview = $('#preview')[0];
+var ctxPreview = preview.getContext( '2d' );
+var previewWitdh = 50;
+var previewdHeight = 100; // TODO: NEED TO MAKE THE WIDTH RESPONSIVE
+
+var rubymonImgArray = $('.rubymon-img');
+var colors = [1, 2, 3, 4, 5, 6]; // 1:red, 2:blue, 3:green, 4:purple, 5:yellow, 6:grey(sad)
+
+//////////////////////////////////////////////////////////////////////////////
+// PART 2: GLOBAL VARIABLES - REFRESHABLE
+//////////////////////////////////////////////////////////////////////////////
+
 var inputFlag = true;
 var rensaCount = 0;
-var puyoGroup = [];
-var score = 0;
 var anotherX = 0;
 var anotherY = 0;
+// var puyoGroup = [];
+// var score = 0;
+var currentRubyBox;
+var currentX, currentY;
+var newX, newY;
+var lostStatus;
+var interval;
+var tickSpeed = 450;
+var rensaInterval;
 
-function newShape() {
-    var col = puyocolors[color_index];
-    current = [[col[0],0],[col[1],0]];
-    currentX = 2; //sets the x-axis starting location for blocks to drop
-    currentY = 0; //sets the y-axis starting location for blocks to drop
-    color_index  = ( color_index + 1 ) % puyocolors.length;
+var gameboardInplay;
+var gameboardInit = [[0, 0, 0, 0, 0, 0], // Top Row
+                     [0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0]]; // Bottom Row, 12  rows total
+
+var rubymonPairsPreset = [];
+var currentRubymonIndex = 0;
+
+//////////////////////////////////////////////////////////////////////////////
+// PART 3: INITIALIZE GAME
+//////////////////////////////////////////////////////////////////////////////
+
+function prepareEmptyPreset() {
+  for ( var i = 0; i < 150; i++ ) {
+    rubymonPairsPreset[i] = [0, 0];
+  }
 }
 
-function createColors(){
-    var cols = [64,64,64,64];
-
-    //Creates 128 color elements with [0,0] value
-    for ( var a = 0; a < 128; ++a ) {
-        puyocolors[a] = [0,0];
+function prepareRubymonPreset() {
+  prepareEmptyPreset();
+  var colorTrays = [60, 60, 60, 60, 60];
+  for (var i = 0; i < 300; i++) {
+    var randomIndex = _.random(0, colorTrays.length - 1);
+    if ( colorTrays[randomIndex] > 0) {
+      rubymonPairsPreset[i % 150][Math.floor(i / 150)] = colors[randomIndex];
+      colorTrays[randomIndex]--;
     }
-
-    for (var tomato = 0; tomato < 256; tomato) {
-        var cur = (Math.ceil(Math.random()*cols.length))%cols.length; //Generates random # bt 0 and 3
-
-        //Pushes 128 color combinations into the puyocolors array set up above
-        if ( cols[cur] > 0 ) {
-            cols[cur]--;
-            puyocolors[tomato%128][Math.floor(tomato/128)]=colors[cur];
-            tomato++;
-        }
-    }
+  }
 }
 
-function init() {
-    for ( var y = 0; y < ROWS; ++y ) {
-        board[ y ] = [];
-        for ( var x = 0; x < COLS; ++x ) {
-            board[ y ][ x ] = 0;
-        }
-    }
-    createColors();
+function deployNewRubymonPair() {
+  var currentRubyPair = rubymonPairsPreset[currentRubymonIndex];
+  currentRubyBox = [[currentRubyPair[0],0],
+                    [currentRubyPair[1],0]];
+  currentX = 2;
+  currentY = 1;
+  currentRubymonIndex  = ( currentRubymonIndex + 1 ) % rubymonPairsPreset.length;
 }
+
+function prepareBlankGameboardArray() {
+    gameboardInplay = gameboardInit;
+}
+
+function newGame() {
+  clearInterval(interval);
+  prepareBlankGameboardArray();
+  prepareRubymonPreset();
+  deployNewRubymonPair();
+  lostStatus = false;
+  interval = setInterval( tick, tickSpeed );
+}
+
+newGame();
+
+//////////////////////////////////////////////////////////////////////////////
+// PART 4: RUBYRAGE GAME LOGIC
+//////////////////////////////////////////////////////////////////////////////
 
 function tick() {
-    if ( valid( 0, 1 ) ) {
-        ++currentY;
-        return
-    }
+  if ( valid( 0, 1 ) ) {
+      ++currentY;
+      return
+  }
 
-    if(blockLanding()){
-        return;
-    }
+  if(freeze()){ return; }
 
-    if(clear()){
-        return;
-    }
+  if(clear()){ return; }
 
-    if (lose) {
-        newGame();
-        return false;
-    }
+  if (lostStatus) {
+      newGame();
+      return false;
+  }
 
-    newShape();
-
+  deployNewRubymonPair();
 }
 
-
-function blockLanding() {
-
-    // Attaches fallen board pieces onto board
-    for ( var y = 1; 0 <= y; --y ) {
-        for ( var x = 0; x < 2; ++x ) {
-            if ( (y + currentY) >= (ROWS - 1) || board[ y + 1 +currentY][ x + currentX ] != 0){
-                if ( current[y][x] ) {
-                    board[ y + currentY ][ x + currentX ] = current[ y ][ x ];
-                    current[y][x] = 0;
-                }
-            }
+function freeze() {
+  for ( var y = 1; 0 <= y; --y ) {
+    for ( var x = 0; x < 2; ++x ) {
+      if ( (y + currentY) >= (gameboardRows - 1)  ||
+         gameboardInplay[ y + 1 +currentY][ x + currentX ] != 0){
+        if ( currentRubyBox[ y ][ x ] ) {
+            gameboardInplay[ y + currentY ][ x + currentX ] = currentRubyBox[ y ][ x ];
+            currentRubyBox[y][x] = 0;
         }
+      }
     }
+  }
 
-    // Allows blocks to fall naturally when other blocks are in the way
-    for ( var y = 1; 0 <= y; --y ) {
-        for ( var x = 0; x < 2; ++x ) {
-            if( current[y][x] ){
-                return true;
-            }
-        }
+  for ( var y = 1; 0 <= y; --y ) {
+    for ( var x = 0; x < 2; ++x ) {
+      if( currentRubyBox[y][x] ){
+          return true;
+      }
     }
+  }
 
-    return false;
-
+  return false;
 }
 
-function rotate( current ) {
-    newX = 0;
-    newY = 0;
-    if (current[0][0] != 0 ){
-        if ( current[0][1] != 0 ){
-            newX = - 1;
-
-            if(currentY == 13 || board[currentY+1][currentX] != 0 ) {
-                newY--;
-            }
-        }else if ( current[1][0] != 0){
-            newY = 1;
-            if(currentX == 5){
-                newX--;
-            }else if(board[currentY+1][currentX+newX+1] != 0){
-                newY--;
-            }
-        }
-
-    }else if ( current[1][1] != 0 ){
-        if ( current[0][1] != 0 ){
-            newY = -1;
-            if ( currentX == -1 ) {
-                newX++;
-                newY++;
-            }
-        }else if ( current[1][0] != 0){
-            newX = 1;
-        }
+function rotate( currentRubyBox ) {
+  newX = 0;
+  newY = 0;
+  if (currentRubyBox[0][0] != 0 ){
+    if ( currentRubyBox[0][1] != 0 ){  //  **
+        newX = - 1;
+                     //  --
+      if(currentY == 13 || gameboardInplay[currentY+1][currentX] != 0 ) {
+        newY--;
+      }
+    }else if ( currentRubyBox[1][0] != 0){  //  *-
+        newY = 1;                    //  *-
+      if(currentX == 5){
+        newX--;
+      }else if(gameboardInplay[currentY+1][currentX+newX+1] != 0){
+        newY--;
+      }
     }
 
-    var newCurrent = [];
-    for ( var y = 0; y < 2; ++y ) {
-        newCurrent[ y ] = [];
-        for ( var x = 0; x < 2; ++x ) {
-            newCurrent[ y ][ x ] = current[ 1 - x ][ y ];
+  } else if ( currentRubyBox[1][1] != 0 ){
+    if ( currentRubyBox[0][1] != 0 ){  //  --
+        newY = -1;              //  **
+        if ( currentX == -1 ) {
+          newX++;
+          newY++;
         }
+    } else if ( currentRubyBox[1][0] != 0){ //  -*
+        newX = 1;                   //  -*
     }
+  }
 
-    return newCurrent;
+  var newCurrent = [];
+  for ( var y = 0; y < 2; ++y ) {
+    newCurrent[ y ] = [];
+    for ( var x = 0; x < 2; ++x ) {
+        newCurrent[ y ][ x ] = currentRubyBox[ 1 - x ][ y ];
+    }
+  }
+
+  return newCurrent;
 }
 
 function pauseScreen(){
-    if ( interval != 0 ){
-        clearInterval( interval );
-        interval = 0;
-    }else {
-        interval = setInterval( tick, 250 )
-    }
+  if ( interval != 0 ){
+    clearInterval( interval );
+    interval = 0;
+  } else {
+    interval = setInterval( tick, tickSpeed )
+  }
 }
-
 
 function clear() {
-    //If clearPuyo, defined below, is true, is_erased is set to true
-    var is_erased;
-    is_erased = false;
-    for ( var y = 0; y < ROWS; ++y ) {
-        for ( var x = 0; x < COLS; ++x ) {
-            if ( board[y][x] != 0) {
-                if ( clearPuyo(x,y) ) {
-                    is_erased = true;
-                }
-            }
-        }
-    }
-    //If is_erased is true, it stops the timer, calls clear again, and adds score
-    if (is_erased){
-        if (interval != 0) {
-            clearInterval(interval);
-            interval = 0;
-            inputFlag = false;
-            rensaInterval = setInterval(clear,500);
-        }
-        scorer();
-        packPuyos();
-        rensaCount++;
-        puyoGroup = [];
-        return true;
 
+  var is_erased;
+  is_erased = false;
+  for ( var y = 0; y < gameboardRows; ++y ) {
+    for ( var x = 0; x < gameboardColumns; ++x ) {
+      if ( gameboardInplay[y][x] != 0) {
+        if ( clearPuyo(x,y) ) {
+            is_erased = true;
+        }
+      }
     }
+  }
 
-    //Restarts the timer if the second statement above returns false on later iterations
-    if (interval == 0) {
-        clearInterval(rensaInterval);
-        newShape();
-        interval = setInterval( tick, 250 );
-        inputFlag = true;
-        rensaCount = 0
-    }
-    return false;
+  if (is_erased){
+      if (interval != 0) {
+        clearInterval(interval);
+        interval = 0;
+        inputFlag = false;
+        rensaInterval = setInterval(clear,500);
+      }
+      packPuyos();
+      rensaCount++;
+      puyoGroup = [];
+      return true;
+
+  }
+
+  if (interval == 0) {
+      clearInterval(rensaInterval);
+      deployNewRubymonPair();
+      interval = setInterval( tick, tickSpeed );
+      inputFlag = true;
+      rensaCount = 0
+  }
+  return false;
 
 }
 
-//
 function packPuyos(){
-    for ( var x = 0; x < COLS; ++x ) {
-        for ( var y = 0; y < ROWS-1; ++y ) {
-            var startY = ROWS - y - 2
-
-            if (board[startY][x] != 0){
-                var my = startY + 1
-                for ( ; my < ROWS; my++) {
-                    if ( board[my][x] != 0) break;
-                }
-
-                if (my != startY + 1 &&  board[my-1][x] == 0) {
-                    board[my-1][x]  = board[startY][x];
-                    board[startY][x] = 0;
-                }
-
-            }
+  for ( var x = 0; x < gameboardColumns; ++x ) {
+    for ( var y = 0; y < gameboardRows-1; ++y ) {
+      var starty = gameboardRows - y - 2
+      if (gameboardInplay[starty][x] != 0){
+        var my = starty + 1
+        for ( ; my < gameboardRows; my++) {
+            if ( gameboardInplay[my][x] != 0) break;
         }
+        if (my != starty + 1 &&  gameboardInplay[my-1][x] == 0) {
+            gameboardInplay[my-1][x]  = gameboardInplay[starty][x];
+            gameboardInplay[starty][x] = 0;
+        }
+      }
     }
-
+  }
 }
 
-function createPuyo(x,y,col){
+function createRubymon(x,y,col){ // THIS CREATE A PUYO OBJECT
     var puyo = {x: x , y: y, col: col};
     return puyo;
 }
 
 function clearPuyo(x,y) {
-    var marked = [];
-    for (var i = 0 ; i< ROWS; i++ ){
-        marked[i] = [];
-        for (var j = 0 ; j< COLS; j++ ){
-            marked[i][j] = 0;
-        }
+  var marked = [];
+  for (var i = 0 ; i< gameboardRows; i++ ){
+    marked[i] = [];
+    for (var j = 0 ; j< gameboardColumns; j++ ){
+        marked[i][j] = 0;
     }
+  }
 
-    var puyo = createPuyo(x,y,board[y][x]);
-    var same_puyos = [puyo];
+  var puyo = createRubymon(x,y,gameboardInplay[y][x]);
+  var same_puyos = [puyo];
 
-    if( puyo.col == 0 || puyo.col == 'gray') return false;
+  if( puyo.col == 0 || puyo.col == 'gray') return false;
 
-    findPuyos(same_puyos,marked);
+  findPuyos(same_puyos,marked);
 
-    if(same_puyos.length >= 4){
-        var pi = { size: same_puyos.length, color: same_puyos[ 0 ].col };
-        puyoGroup.push(pi);
-        while( puyo = same_puyos.pop()){
-            clearOPuyo( puyo );
-            board[puyo.y][puyo.x] = 0;
-        }
-        return true
+  if(same_puyos.length >= 4){
+    // var pi = { size: same_puyos.length, color: same_puyos[ 0 ].col };
+    // puyoGroup.push(pi);
+    while( puyo = same_puyos.pop()){
+      // clearOPuyo( puyo );
+      gameboardInplay[puyo.y][puyo.x] = 0;
     }
-    return false;
+    return true
+  }
+  return false;
 }
 
 function checkPuyo(cond,x,y,col,same_puyos,marked){
-    if(cond){
-        if(board[y][x] == col ){
-            same_puyos.push(createPuyo(x,y,col));
-            findPuyos(same_puyos,marked);
-        }else{
-            marked[y][x] = true;
-        }
+  if(cond){
+    if(gameboardInplay[y][x] == col ){
+        same_puyos.push(createRubymon(x,y,col));
+        findPuyos(same_puyos,marked);
+    }else{
+        marked[y][x] = true;
     }
+  }
 }
 
 function findPuyos(same_puyos,marked){
-    var puyo = same_puyos.pop()
+  var puyo = same_puyos.pop()
 
-    for(var i = 0; i<same_puyos.length; i++){
-        if (same_puyos[i].x  == puyo.x
-            && same_puyos[i].y == puyo.y
-            && same_puyos[i].col == puyo.col){
-            return;
-    }
-}
-same_puyos.push(puyo);
+  for(var i = 0; i<same_puyos.length; i++){ // THIS FUNCTION CHECKS FOR DUPLICATE PUYO / CAN BE SHORTENED
+      if (same_puyos[i].x  == puyo.x
+          && same_puyos[i].y == puyo.y
+          && same_puyos[i].col == puyo.col){
+          return;
+      }
+  }
+  same_puyos.push(puyo);
 
-if(puyo.col == 0) {
-    marked[puyo.y][puyo.x] = true;
-    return;
-}
+  if(puyo.col == 0) {
+      marked[puyo.y][puyo.x] = true;
+      return;
+  }
 
-if(marked[puyo.y][puyo.x] == true) {
-    return;
-}
+  if(marked[puyo.y][puyo.x] == true) {
+      return;
+  }
 
-marked[puyo.y][puyo.x] = true;
-var x = puyo.x;
-var y = puyo.y;
-var col = puyo.col;
+  marked[puyo.y][puyo.x] = true;
+  var x = puyo.x;
+  var y = puyo.y;
+  var col = puyo.col;
 
-checkPuyo(x>0,x-1,y,col,same_puyos,marked);
-checkPuyo(x<COLS-1,x+1,y,col,same_puyos,marked);
-checkPuyo(y>1,x,y-1,col,same_puyos,marked);
-checkPuyo(y<ROWS-1,x,y+1,col,same_puyos,marked);
-
+  checkPuyo(x>0,x-1,y,col,same_puyos,marked);
+  checkPuyo(x<gameboardColumns-1,x+1,y,col,same_puyos,marked);
+  checkPuyo(y>1,x,y-1,col,same_puyos,marked);
+  checkPuyo(y<gameboardRows-1,x,y+1,col,same_puyos,marked);
 }
 
 function keyPress( key ) {
+  if (inputFlag == false) {
+      return;
+  }
 
-    if (inputFlag == false) {
-        return;
+  switch ( key ) {
+  case 'left':
+    if ( valid( -1, 0 ) && puyoSize() > 1  ) {
+        --currentX;
     }
-
-    switch ( key ) {
-        case 'left':
-        if ( valid( -1 ) && puyoSize() > 1  ) {
-            --currentX;
-        }
-        break;
-        case 'right':
-        if ( valid( 1 ) && puyoSize() > 1  ) {
-            ++currentX;
-        }
-        break;
-        case 'down':
-        if ( valid( 0, 1 ) && puyoSize() > 1 ) {
-            ++currentY;
-        }
-        break;
-        case 'rotate':
-        var rotated = rotate( current );
-
-        if ( valid( newX, newY, rotated ) ) {
-            current = rotated;
-            currentX = currentX + newX
-            currentY = currentY + newY
-        }else if ( valid( newX + anotherX, newY + anotherY, rotated ) ) {
-            current = rotated;
-            currentX = currentX + newX + anotherX
-            currentY = currentY + newY + anotherY;
-        }
-        break;
-        case 'pauseScreen':
-        pauseScreen();
-        break;
+    break;
+  case 'right':
+    if ( valid( 1, 0 ) && puyoSize() > 1  ) {
+        ++currentX;
     }
+    break;
+  case 'down':
+    if ( valid( 0, 1 ) && puyoSize() > 1 ) {
+        ++currentY;
+    }
+    break;
+  case 'rotate':
+    var rotated = rotate( currentRubyBox );
+    //        f0001( rotated );
+    if ( valid( newX, newY, rotated ) ) {
+        currentRubyBox = rotated;
+        currentX = currentX + newX
+        currentY = currentY + newY
+    } else if ( valid( newX + anotherX, newY + anotherY, rotated ) ) {
+      currentRubyBox = rotated;
+      currentX = currentX + newX + anotherX
+      currentY = currentY + newY + anotherY;
+    }
+    break;
+  case 'pauseScreen':
+    pauseScreen();
+    break;
+  }
 }
+
+document.body.onkeydown = function( e ) {
+  var keys = {
+      37: 'left',
+      39: 'right',
+      40: 'down',
+      38: 'rotate',
+      13: 'pauseScreen'
+  };
+  if ( typeof keys[ e.keyCode ] != 'undefined' ) {
+      keyPress( keys[ e.keyCode ] );
+      // renderAll();
+  }
+};
 
 function valid( offsetX, offsetY, newCurrent ) {
-    offsetX = offsetX || 0; //first parameter is equal to itself or 0
-    offsetY = offsetY || 0; //second parameter is equal to itself or 0
-    offsetX = currentX + offsetX; //first parameter equal to itself plus currentX
-    offsetY = currentY + offsetY;
-    newCurrent = newCurrent || current;
+  offsetX = currentX + offsetX;
+  offsetY = currentY + offsetY;
+  newCurrent = newCurrent || currentRubyBox;
 
-    for ( var y = 0; y < 2; ++y ) {
-        for ( var x = 0; x < 2; ++x ) {
-            if ( newCurrent[ y ][ x ] ) {
-
-                if ( typeof board[ y + offsetY ] == 'undefined'
-                    || typeof board[ y + offsetY ][ x + offsetX ] == 'undefined'
-                    || board[ y + offsetY ][ x + offsetX ]
-                    || x + offsetX < 0
-                    || y + offsetY >= ROWS
-                    || x + offsetX >= COLS ) {
-                    if (offsetY == 3 && offsetX == 2) lose = true;
-                if (offsetY == 2 && offsetX == 2) lose = true;
-                return false;
-            }
+  for ( var y = 0; y < 2; ++y ) {
+    for ( var x = 0; x < 2; ++x ) {
+      if ( newCurrent[ y ][ x ] ) {
+        if ( typeof gameboardInplay[ y + offsetY ] == 'undefined'
+           || typeof gameboardInplay[ y + offsetY ][ x + offsetX ] == 'undefined'
+           || gameboardInplay[ y + offsetY ][ x + offsetX ]
+           || x + offsetX < 0
+           || y + offsetY >= gameboardRows
+           || x + offsetX >= gameboardColumns ) {
+          if (offsetY == 3 && offsetX == 2) lostStatus = true;
+          if (offsetY == 2 && offsetX == 2) lostStatus = true;
+          return false;
         }
+      }
     }
+  }
+  return true;
 }
-return true;
-}
-
-function scorer() {
-    var colorBonus = [ 0, 0, 3, 6, 12];
-    var rensaBonus = [ 0, 8, 16, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448, 480, 512, 544];
-    var connectBonus = [ 0, 0, 0, 0, 0, 2, 3, 4, 5, 6, 7, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,];
-    var currentBonus = 0;
-    var erasedPuyos = 0;
-    var uniquecolors = []
-    for ( var  x = 0; x < puyoGroup.length; x++ ) {
-        currentBonus = currentBonus + connectBonus[puyoGroup[x].size];
-    }
-    currentBonus = currentBonus + rensaBonus[rensaCount];
-    for ( var  y = 0; y < puyoGroup.length; y++ ) {
-        erasedPuyos = erasedPuyos + puyoGroup[y].size;
-    }
-    for ( var  z = 0; z < puyoGroup.length; z++ ) {
-        var inserted = false;
-        for ( var i = 0; i < uniquecolors.length; i++ ) {
-            if ( uniquecolors[i] == puyoGroup[z].color ) {
-                inserted = true;
-                break;
-            }
-        }
-        if ( inserted == false ) {
-            uniquecolors.push(puyoGroup[z].color);
-        }
-    }
-    currentBonus = currentBonus + connectBonus[uniquecolors.length];
-    currentBonus = currentBonus || 1;
-    score = score + currentBonus*10*erasedPuyos;
-}
-
-function clearOPuyo( puyo ) {
-    for ( var x = -1 ; x < 2; x++ ) {
-        for ( var y = -1 ; y < 2; y++ ) {
-            if ( Math.abs(x) != Math.abs(y) &&
-                0 <= (puyo.y + y) &&
-                (puyo.y + y) < board.length &&
-                0 <= (puyo.x + x) &&
-                (puyo.x + x) < board[0].length &&
-                board[puyo.y + y][puyo.x + x] == 'gray' ) {
-                board[puyo.y + y][puyo.x + x] = 0;
-        }
-    }
-}
-}
-
-function newGame() {
-    clearInterval(interval);
-    init();
-    newShape();
-    lose = false;
-    interval = setInterval( tick, 250 );
-    score = 0;
-}
-
-newGame();
 
 function puyoSize() {
-    var z = 0;
-    for ( var y = 1; 0 <= y; --y ) {
-        for ( var x = 0; x < 2; ++x ) {
-            if ( current[ x ][ y ] != 0 ) {
-                z++;
-            }
-        }
+  var z = 0;
+  for ( var y = 1; 0 <= y; --y ) {
+    for ( var x = 0; x < 2; ++x ) {
+      if ( currentRubyBox[ x ][ y ] != 0 ) {
+        z++;
+      }
     }
-    return z;
+  }
+  return z;
 }
+
+
+//////////////////////////////////////////////////////////////////////////////
+// PART 4: GAME RENDERING
+//////////////////////////////////////////////////////////////////////////////
+
+function selectRubymon(colorNumber) {
+  return rubymonImgArray[colorNumber];
+}
+
+function showRubymon(whichCtx, img, xPosition, yPosition) {
+  whichCtx.drawImage( img, 0, 0, 140, 126, eachColumnWidth * xPosition, eachRowHeight * yPosition, 50, 40);
+}
+
+function renderSittingRubymons() {
+  for ( var x = 0; x < gameboardColumns; ++x ) {
+    for ( var y = 0; y < gameboardRows ; ++y ) {
+      var selectedRubymon = selectRubymon(gameboardInplay[ y ][ x ]);
+      showRubymon(ctxGameboard, selectedRubymon, x, y);
+    }
+  }
+}
+
+function renderFallingRubymons() {
+  for ( var y = 0; y < 2; y++ ) {
+    for ( var x = 0; x < 2; x++ ) {
+      var selectedRubymon = selectRubymon(currentRubyBox[ y ][ x ]);
+      showRubymon(ctxGameboard, selectedRubymon, currentX + x, currentY + y);
+      // debugger;
+    }
+  }
+}
+
+function renderNextRubymons() {
+  var nextRubymonIndex = currentRubymonIndex + 1;
+  var nextRubymonPair = rubymonPairsPreset[nextRubymonIndex]
+  for ( var yPosition = 0; yPosition < 2; yPosition++) {
+    var selectedRubymon = selectRubymon(nextRubymonPair[yPosition]);
+    showRubymon(ctxPreview, selectedRubymon, 0, yPosition);
+  }
+}
+
+function paintOverGameboardAndPrewview() {
+  ctxGameboard.fillStyle = 'lightgrey';
+  ctxGameboard.fillRect( 0, 0, gameboardWitdh, gameboardHeight );
+  ctxPreview.fillStyle = 'lightblue';
+  ctxPreview.fillRect( 0, 0, previewWitdh, previewdHeight );
+}
+
+function renderAll() {
+  paintOverGameboardAndPrewview();
+  renderSittingRubymons();
+  renderFallingRubymons();
+  renderNextRubymons();
+}
+
+setInterval( renderAll, 30 );
+
