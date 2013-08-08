@@ -9,4 +9,10 @@ class GamesController < ApplicationController
   def multi
   end
 
+  def pusher
+    Pusher['test_channel'].trigger('my_event', {
+      message: 'hello world'
+    })
+  end
+
 end

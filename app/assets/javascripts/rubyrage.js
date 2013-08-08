@@ -100,7 +100,11 @@ function newGame() {
   interval = setInterval( tick, tickSpeed );
 }
 
-newGame();
+$('#start-button').click(function(){
+  newGame();
+  $('#start-button').hide();
+});
+
 
 //////////////////////////////////////////////////////////////////////////////
 // PART 4: RUBYRAGE GAME LOGIC
@@ -109,7 +113,7 @@ newGame();
 function tick() {
   if ( valid( 0, 1 ) ) {
       ++currentY;
-      return
+      return;
   }
 
   if(freeze()){ return; }
