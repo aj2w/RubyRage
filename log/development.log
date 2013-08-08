@@ -8544,3 +8544,4 @@ Processing by GamesController#single as HTML
   Rendered layouts/_navbar.html.erb (0.5ms)
 Completed 200 OK in 17ms (Views: 17.1ms | ActiveRecord: 0.0ms)
 >>>>>>> f4573c420fef3bb09ec2de115601350b997164cc
+Connecting to database specified by database.yml
