@@ -102,6 +102,7 @@ function newGame() {
 
 $('#start-button').click(function(){
   newGame();
+  setInterval( renderAll, 30 );
   $('#start-button').hide();
 });
 
@@ -481,5 +482,5 @@ function renderAll() {
   renderNextRubymons();
 }
 
-setInterval( renderAll, 30 );
+
 
