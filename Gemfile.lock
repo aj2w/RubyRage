@@ -49,6 +49,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     columnize (0.3.6)
+    crack (0.1.8)
     debug_inspector (0.0.2)
     debugger (1.6.1)
       columnize (>= 0.3.1)
@@ -90,10 +91,18 @@ GEM
     pry-stack_explorer (0.4.9)
       binding_of_caller (>= 0.7)
       pry (~> 0.9.11)
+<<<<<<< HEAD
+    pusher (0.6.0)
+      crack
+      json
+      ruby-hmac
+      signature
+=======
     pusher (0.12.0)
       httpclient (~> 2.3.0)
       multi_json (~> 1.0)
       signature (~> 0.1.6)
+>>>>>>> f4573c420fef3bb09ec2de115601350b997164cc
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.4.5)
@@ -129,12 +138,18 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ruby-graphviz (1.0.9)
+    ruby-hmac (0.4.0)
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+<<<<<<< HEAD
+    signature (0.1.2)
+      ruby-hmac
+=======
     signature (0.1.7)
+>>>>>>> f4573c420fef3bb09ec2de115601350b997164cc
     slop (3.4.5)
     sprockets (2.2.2)
       hike (~> 1.2)
