@@ -1,4 +1,4 @@
-
+<%= @randomvar %>
 // Enable pusher logging - don't include this in production
 Pusher.log = function(message) {
   if (window.console && window.console.log) {
@@ -7,10 +7,10 @@ Pusher.log = function(message) {
 };
 
 var pusher = new Pusher('<%= Pusher.key %>');
-debugger;
 var socketId = null;
 
-var channel = pusher.subscribe('ny_channel');
+var channel = pusher.subscribe('anuj');
+
 channel.bind('my_event', function(data) {
-  alert(data.message);
+  $('#opponent').append(data.message)
 });

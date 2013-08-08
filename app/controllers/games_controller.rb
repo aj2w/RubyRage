@@ -10,7 +10,8 @@ class GamesController < ApplicationController
   end
 
   def pusher
-    Pusher['ny_channel'].trigger('my_event', {
+
+    Pusher['thomas'].trigger('my_event', {
       message: 'hello world'
     })
   end
