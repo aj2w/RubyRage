@@ -12,5 +12,19 @@ var socketId = null;
 var channel = pusher.subscribe('anuj');
 
 channel.bind('my_event', function(data) {
-  $('#opponent').append(data.message)
+  // var opponentUpdate = setInterval(updateText(data), 1000);
+    $('#opponent').append(data.message);
 });
+
+
+$('#battle-button').click(function){
+  setInterval(startSendingRequest, 1000);
+}
+
+function startSendingRequest() {
+  $.ajax({
+    url: "/games/pusher",
+    type: "get",
+    data: "json"
+  })
+}
