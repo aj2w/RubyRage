@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-var ruby_rage = {
-
-}
-
-var COLS = 6;
-var ROWS = 14;
-var board = [];
-var lose;
-var interval;
-var rensaInterval;
-var current;
-var currentX, currentY;
-var newX, newY;
-var colors = ['blue', 'yellow' ,'red', 'green', 'gray'];
-var puyocolors = [];
-var color_index =0;
-=======
-
 
 //////////////////////////////////////////////////////////////////////////////
 // PART 1: GLOBAL VARIABLES - CONSTANT
@@ -44,7 +25,6 @@ var colors = [1, 2, 3, 4, 5, 6]; // 1:red, 2:blue, 3:green, 4:purple, 5:yellow, 
 // PART 2: GLOBAL VARIABLES - REFRESHABLE
 //////////////////////////////////////////////////////////////////////////////
 
->>>>>>> 66e8b159f1c3e96d7c85c06e090451a39b1c27f8
 var inputFlag = true;
 var rensaCount = 0;
 var anotherX = 0;

@@ -1,4 +1,16 @@
-<canvas width='300' height='600'></canvas>
+<div id="rubymon-set">
+  <img class="rubymon-img" id="blank">
+  <%= image_tag 'rubymon3d_red.png', class: 'rubymon-img', id: 'red' %>
+  <%= image_tag 'rubymon3d_blue.png', class: 'rubymon-img', id: 'blue' %>
+  <%= image_tag 'rubymon3d_green.png', class: 'rubymon-img', id: 'green' %>
+  <%= image_tag 'rubymon3d_purple.png', class: 'rubymon-img', id: 'purple' %>
+  <%= image_tag 'rubymon3d_yellow.png', class: 'rubymon-img', id: 'yellow' %>
+  <%= image_tag 'rubymon3d_sad.png', class: 'rubymon-img', id: 'sad' %>
+</div>
+
+<canvas width='300' height='480' id="gameboard"></canvas> <!-- TODO: NEED TO MAKE IT RESPONSIVE -->
+<canvas width='50' height='100' id="preview"></canvas> <!-- TODO: NEED TO MAKE IT RESPONSIVE -->
+
 <br><a href="/games/dashboard" class="button round">Back to Dashboard</a>
 
 <%= javascript_include_tag "rubyrage" %>

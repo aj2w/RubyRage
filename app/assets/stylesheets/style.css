@@ -61,3 +61,7 @@ nav.top-bar {
   border-left: #CC6A52;
   border-right: #CC6A52;
 }
+
+#rubymon-set {
+  display: none;
+}
