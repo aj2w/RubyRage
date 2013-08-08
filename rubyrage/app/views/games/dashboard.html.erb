@@ -1,7 +1,10 @@
-<p>Welcome to the game dashboard, <% if @current_user %>
-   <%= @current_user.email %>
-<% end %></p>
+<div class="row">
+  <div class="left_selection large-6 centered columns">
+<%= button_to "Single Player", games_single_path, :class => 'button_users' %>
 
-<p>Select single or multiplayer</p>
+  </div>
+  <div class="right_selection large-6 centered columns">
+<%= button_to "Multi Player", games_single_path, :class => 'button_users' %>
+  </div>
+</div>
 
-<%= link_to "Single Player", games_single_path %>

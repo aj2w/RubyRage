@@ -7,11 +7,14 @@
 </head>
 
 <body>
-  <h1>Ruby Rage</h1>
+  <div class="row">
+  <div class="small-4 large-centered columns">
+<h1>Ruby Rage</h1>
 
-  <button class="play">Play!</button>
+  <button class="play button round">Play!</button>
 
   <div class="form_area">
+    <fieldset>
     <%= form_tag sessions_path do %>
     <p>
       <%= label_tag :email %>
@@ -24,8 +27,13 @@
     <p><%= submit_tag "Sign in"%></p>
     <% end %>
 
-    <%= link_to "Create an account", new_user_path %>
+    <%= button_to "Create an account", new_user_path %>
+  </fieldset>
   </div>
+
+  </div>
+</div>
+
 </body>
 </html>
 

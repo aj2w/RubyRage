@@ -5,3 +5,20 @@ canvas {
 .form_area {
   display: none;
 }
+
+body{
+  text-align: center;
+}
+
+.button_users {
+margin: auto;
+}
+
+.left_selection {
+  border-right: 3px dashed gray;
+  height: 800px;
+}
+
+.right_selection {
+  height: 800px;
+}
