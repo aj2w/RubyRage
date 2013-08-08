@@ -7,7 +7,10 @@ Pusher.log = function(message) {
 };
 
 var pusher = new Pusher('<%= Pusher.key %>');
-var channel = pusher.subscribe('test_channel');
+debugger;
+var socketId = null;
+
+var channel = pusher.subscribe('ny_channel');
 channel.bind('my_event', function(data) {
   alert(data.message);
 });

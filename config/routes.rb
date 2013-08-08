@@ -8,7 +8,7 @@ Rubyrage::Application.routes.draw do
 
  get '/games/dashboard' => 'games#dashboard'
  get '/games/single' => 'games#single'
- get '/games/multi' => 'games#multi'
+ get '/games/multi/:token' => 'games#multi'
  get '/games/pusher' => 'games#pusher'
 
  end
