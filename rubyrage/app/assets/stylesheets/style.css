@@ -1,0 +1,63 @@
+canvas {
+  border: 5px solid #CC6A52;
+  margin-top: 60px;
+}
+
+.form_area {
+  display: none;
+}
+
+body{
+  text-align: center;
+  background: #FF8566;
+  height: 800px;
+}
+
+.button_users {
+  margin: auto;
+  margin-top: 125px;
+  padding: 50px;
+  font-family: 'Finger Paint', cursive;
+}
+
+.left_selection {
+  border-right: 3px dashed gray;
+  height: 800px;
+}
+
+.right_selection {
+  height: 800px;
+}
+
+.title {
+  font-family: 'Finger Paint', cursive;
+}
+
+nav.top-bar {
+  background: #CC6A52;
+}
+
+.right_bar {
+  background: #CC6A52;
+}
+
+.top-bar {
+  margin-bottom: 0;
+}
+
+.columns.large-centered {
+  margin-top: 125px;
+}
+
+.navbar_font {
+  font-family: 'Finger Paint', cursive;
+}
+
+.top-bar-section li a:not(.button) {
+  background: #CC6A52;
+}
+
+.top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"] {
+  border-left: #CC6A52;
+  border-right: #CC6A52;
+}
