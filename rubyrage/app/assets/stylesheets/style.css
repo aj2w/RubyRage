@@ -8,10 +8,15 @@ canvas {
 
 body{
   text-align: center;
+  background: #FF8566;
+  height: 800px;
 }
 
 .button_users {
-margin: auto;
+  margin: auto;
+  margin-top: 125px;
+  padding: 50px;
+  font-family: 'Finger Paint', cursive;
 }
 
 .left_selection {
@@ -21,4 +26,28 @@ margin: auto;
 
 .right_selection {
   height: 800px;
+}
+
+.title {
+  font-family: 'Finger Paint', cursive;
+}
+
+nav.top-bar {
+  background: #CC6A52;
+}
+
+.right_bar {
+  background: #CC6A52;
+}
+
+.top-bar {
+  margin-bottom: 0px;
+}
+
+.columns.large-centered {
+  margin-top: 125px;
+}
+
+.navbar_font {
+  font-family: 'Finger Paint', cursive;
 }
