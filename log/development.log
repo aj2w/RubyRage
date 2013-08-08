@@ -8352,3 +8352,47 @@ Processing by GamesController#multi as HTML
   Rendered games/multi.html.erb within layouts/application (1.6ms)
   Rendered layouts/_navbar.html.erb (0.5ms)
 Completed 200 OK in 14ms (Views: 12.6ms | ActiveRecord: 0.1ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/games/dashboard" for 127.0.0.1 at 2013-08-08 14:28:32 -0400
+Processing by GamesController#dashboard as HTML
+  Rendered games/dashboard.html.erb within layouts/application (3.6ms)
+  Rendered layouts/_navbar.html.erb (1.6ms)
+Compiled application.js  (43ms)  (pid 56579)
+Completed 200 OK in 159ms (Views: 158.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 14:28:33 -0400
+Processing by GamesController#single as HTML
+  Rendered games/single.html.erb within layouts/application (6.8ms)
+  Rendered layouts/_navbar.html.erb (0.9ms)
+Completed 200 OK in 28ms (Views: 27.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/games/dashboard" for 127.0.0.1 at 2013-08-08 14:32:54 -0400
+Processing by GamesController#dashboard as HTML
+  Rendered games/dashboard.html.erb within layouts/application (0.1ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 17ms (Views: 16.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/games/multi" for 127.0.0.1 at 2013-08-08 14:32:56 -0400
+Processing by GamesController#multi as HTML
+  Rendered games/multi.html.erb within layouts/application (1.6ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 47ms (Views: 46.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/games/dashboard" for 127.0.0.1 at 2013-08-08 14:32:59 -0400
+Processing by GamesController#dashboard as HTML
+  Rendered games/dashboard.html.erb within layouts/application (0.0ms)
+  Rendered layouts/_navbar.html.erb (0.7ms)
+Completed 200 OK in 15ms (Views: 14.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/games/single" for 127.0.0.1 at 2013-08-08 14:33:00 -0400
+Processing by GamesController#single as HTML
+  Rendered games/single.html.erb within layouts/application (2.1ms)
+  Rendered layouts/_navbar.html.erb (0.5ms)
+Completed 200 OK in 17ms (Views: 17.1ms | ActiveRecord: 0.0ms)
