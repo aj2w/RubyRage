@@ -1,3 +1,7 @@
+var ruby_rage = {
+
+}
+
 var COLS = 6;
 var ROWS = 14;
 var board = [];
