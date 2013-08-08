@@ -4431,3 +4431,14 @@ Compiled loginform.js  (0ms)  (pid 51302)
 Compiled application.js  (19ms)  (pid 51302)
   Rendered layouts/_navbar.html.erb (1.3ms)
 Completed 200 OK in 244ms (Views: 223.3ms | ActiveRecord: 0.6ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/" for 127.0.0.1 at 2013-08-08 12:48:16 -0400
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (28.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Compiled loginform.js  (0ms)  (pid 53802)
+  Rendered welcome/index.html.erb within layouts/application (13.7ms)
+Compiled application.js  (17ms)  (pid 53802)
+  Rendered layouts/_navbar.html.erb (2.0ms)
+Completed 200 OK in 262ms (Views: 181.4ms | ActiveRecord: 30.8ms)
