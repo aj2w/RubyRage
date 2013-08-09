@@ -7,24 +7,25 @@ Pusher.log = function(message) {
 };
 
 var pusher = new Pusher('<%= Pusher.key %>');
-var socketId = null;
-
-var channel = pusher.subscribe('anuj');
+var channel = pusher.subscribe('rubyrage_thomas');
 
 channel.bind('my_event', function(data) {
-  // var opponentUpdate = setInterval(updateText(data), 1000);
-  $('#opponent').append(data.message);
-  // alert(data.message);
+  // $('#opponent').append(data.message);
+  alert(data.message)
 });
 
+channel.bind('broadcasting', function(data) {
+  console.log(data.message);
+});
 
 $('#battle-button').click(function(){
+  // startSendingRequest();
   setInterval(startSendingRequest, 1000);
 })
 
 function startSendingRequest() {
   $.ajax({
-    url: "/games/pusher",
+    url: "/games/startBroadcasting",
     type: "get",
     data: "json"
   })

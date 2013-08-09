@@ -10,9 +10,14 @@ class GamesController < ApplicationController
   end
 
   def pusher
-    Pusher['thomas'].trigger('my_event', {
-      message: 'hello world'
+    Pusher['rubyrage_thomas'].trigger('my_event', { message: 'hello world' })
+  end
+
+  def startBroadcasting
+    Pusher['rubyrage_thomas'].trigger('broadcasting', {
+      message: 'start broadcasting game data'
     })
   end
+
 end
 

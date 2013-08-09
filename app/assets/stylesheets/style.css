@@ -66,11 +66,11 @@ nav.top-bar {
   display: none;
 }
 
-#gamebackground {
+/*#gamebackground {
   background: url('stains_surface.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-}
+}*/
 

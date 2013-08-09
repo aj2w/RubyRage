@@ -1,12 +1,8 @@
-<div id="rubymon-set">
-  <img class="rubymon-img" id="blank">
-  <%= image_tag 'rubymon3d_red.png', class: 'rubymon-img', id: 'red' %>
-  <%= image_tag 'rubymon3d_blue.png', class: 'rubymon-img', id: 'blue' %>
-  <%= image_tag 'rubymon3d_green.png', class: 'rubymon-img', id: 'green' %>
-  <%= image_tag 'rubymon3d_purple.png', class: 'rubymon-img', id: 'purple' %>
-  <%= image_tag 'rubymon3d_yellow.png', class: 'rubymon-img', id: 'yellow' %>
-  <%= image_tag 'rubymon3d_sad.png', class: 'rubymon-img', id: 'sad' %>
-</div>
+<%= render 'rubymonset' %>
+
+<div id="start-button">Start Battle</div><br>
+<div id="battle-button">Broadcast Battle</div><br>
+<a href="/games/dashboard" class="button round">Back to Dashboard</a>
 
 <div class="multi">
   <canvas width='300' height='480' id="gameboard"></canvas> <!-- TODO: NEED TO MAKE IT RESPONSIVE -->
@@ -15,9 +11,6 @@
   <canvas width='200'></canvas>
   <canvas width='50' height='100' id="opponent-preview"></canvas> <!-- TODO: NEED TO MAKE IT RESPONSIVE -->
   <canvas width='300' height='480' id="opponent-gameboard"></canvas> <!-- TODO: NEED TO MAKE IT RESPONSIVE -->
-
-<div id="battle-button">Start Battle</div>
-<a href="/games/dashboard" class="button round">Back to Dashboard</a>
-
 </div>
-  <%= javascript_include_tag "rubyrage" %>
+
+<%= javascript_include_tag "rubyrage" %>
