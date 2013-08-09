@@ -2,13 +2,13 @@ class User < ActiveRecord::Base
   attr_accessor :password
   before_save :encrypt_password
 
-  attr_accessible :email, :password, :password_confirmation, :is_admin
+  attr_accessible :username, :password, :password_confirmation, :is_admin
   has_one :stat
 
   validates :password, confirmation: true
   validates :password, presence: true, on: :create
-  validates :email, presence: true
-  validates :email, uniqueness: true
+  validates :username, presence: true
+  validates :username, uniqueness: true
 
   def encrypt_password
     if password.present?
@@ -21,9 +21,9 @@ class User < ActiveRecord::Base
   end
 
   # I can call this with User.authenticate(l,p)
-  def self.authenticate(email, password)
+  def self.authenticate(username, password)
     # This will auth a user
-    user = User.find_by_email(email)
+    user = User.find_by_username(username)
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else

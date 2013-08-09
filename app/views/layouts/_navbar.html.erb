@@ -18,7 +18,7 @@
       <li class="has-dropdown not-click">
         <a class="menubar_user">
           <% if @current_user %>
-          <%= @current_user.email %>
+          <%= @current_user.username %>
           <% else %>
           <%= link_to "Create Account", new_user_path %>
           <% end %>
