@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     if @current_user
       @current_user.last_seen = DateTime.now
       @current_user.save
+      @online_users = User.where("last_seen > ?",20.minutes.ago.to_s(:db))
     end
   end
 
