@@ -1,0 +1,6 @@
+<% if @current_user %>
+  window.location.href = "games/dashboard";
+<% else %>
+  $('#welcomePlay').hide()
+  $('.form_area').html("<%=j render 'loginform' %>").show();
+<% end %>
