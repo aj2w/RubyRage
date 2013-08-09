@@ -1,4 +1,4 @@
-<%= @randomvar %>
+
 // Enable pusher logging - don't include this in production
 Pusher.log = function(message) {
   if (window.console && window.console.log) {
@@ -13,13 +13,14 @@ var channel = pusher.subscribe('anuj');
 
 channel.bind('my_event', function(data) {
   // var opponentUpdate = setInterval(updateText(data), 1000);
-    $('#opponent').append(data.message);
+  $('#opponent').append(data.message);
+  // alert(data.message);
 });
 
 
-$('#battle-button').click(function){
+$('#battle-button').click(function(){
   setInterval(startSendingRequest, 1000);
-}
+})
 
 function startSendingRequest() {
   $.ajax({

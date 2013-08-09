@@ -5,14 +5,14 @@ class GamesController < ApplicationController
 
   def single
   end
-end
+
   def multi
   end
 
   def pusher
-
     Pusher['thomas'].trigger('my_event', {
       message: 'hello world'
     })
   end
+end
 
