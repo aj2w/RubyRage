@@ -54,7 +54,7 @@ var gameboardInit = [[0, 0, 0, 0, 0, 0], // Top Row
                      [0, 0, 0, 0, 0, 0]]; // Bottom Row, 12  rows total
 
 var rubymonPairsPreset = [];
-var currentRubymonIndex = 0;
+var runningRubymonIndex = 0;
 
 //////////////////////////////////////////////////////////////////////////////
 // PART 3: INITIALIZE GAME
@@ -79,12 +79,12 @@ function prepareRubymonPreset() {
 }
 
 function deployNewRubymonPair() {
-  var currentRubyPair = rubymonPairsPreset[currentRubymonIndex];
+  var currentRubyPair = rubymonPairsPreset[runningRubymonIndex];
   currentRubyBox = [[currentRubyPair[0],0],
                     [currentRubyPair[1],0]];
   currentX = 2;
-  currentY = 1;
-  currentRubymonIndex  = ( currentRubymonIndex + 1 ) % rubymonPairsPreset.length;
+  currentY = 0;
+  runningRubymonIndex  = ( runningRubymonIndex + 1 ) % rubymonPairsPreset.length;
 }
 
 function prepareBlankGameboardArray() {
@@ -225,9 +225,9 @@ function clear() {
         inputFlag = false;
         rensaInterval = setInterval(clear,500);
       }
-      packPuyos();
+      bringRubymonsDown();
       rensaCount++;
-      puyoGroup = [];
+      // puyoGroup = [];
       return true;
 
   }
@@ -237,16 +237,16 @@ function clear() {
       deployNewRubymonPair();
       interval = setInterval( tick, tickSpeed );
       inputFlag = true;
-      rensaCount = 0
+      rensaCount = 0;
   }
   return false;
 
 }
 
-function packPuyos(){
+function bringRubymonsDown(){
   for ( var x = 0; x < gameboardColumns; ++x ) {
     for ( var y = 0; y < gameboardRows-1; ++y ) {
-      var starty = gameboardRows - y - 2
+      var starty = gameboardRows - y - 2;
       if (gameboardInplay[starty][x] != 0){
         var my = starty + 1
         for ( ; my < gameboardRows; my++) {
@@ -338,7 +338,7 @@ function findPuyos(same_puyos,marked){
 }
 
 function keyPress( key ) {
-  if (inputFlag == false) {
+  if (inputFlag === false) {
       return;
   }
 
@@ -460,10 +460,9 @@ function renderFallingRubymons() {
 }
 
 function renderNextRubymons() {
-  var nextRubymonIndex = currentRubymonIndex + 1;
-  var nextRubymonPair = rubymonPairsPreset[nextRubymonIndex]
+  var upcomingRubymonPair = rubymonPairsPreset[runningRubymonIndex];
   for ( var yPosition = 0; yPosition < 2; yPosition++) {
-    var selectedRubymon = selectRubymon(nextRubymonPair[yPosition]);
+    var selectedRubymon = selectRubymon(upcomingRubymonPair[yPosition]);
     showRubymon(ctxPreview, selectedRubymon, 0, yPosition);
   }
 }
