@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :current_user
+  #added now
+  # before_filter :update_last_seen
 
   private
   def current_user
@@ -13,6 +15,12 @@ class ApplicationController < ActionController::Base
       @admin = @current_user
     end
   end
+
+  #added now
+    # def update_last_seen
+    #   @current_user.last_seen = DateTime.now
+    #   @current_user.save
+    # end
 
   def require_login
     unless logged_in?

@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20130807175601) do
     t.string   "password"
     t.string   "password_hash"
     t.string   "password_salt"
+    t.datetime "last_seen"
     t.boolean  "is_admin"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
