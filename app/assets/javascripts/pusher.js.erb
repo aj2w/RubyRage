@@ -10,23 +10,32 @@ var pusher = new Pusher('<%= Pusher.key %>');
 var channel = pusher.subscribe('rubyrage_thomas');
 
 channel.bind('my_event', function(data) {
-  // $('#opponent').append(data.message);
   alert(data.message)
 });
 
-channel.bind('broadcasting', function(data) {
-  console.log(data.message);
+channel.bind('gameBroadcast', function(rawGameboardData) {
+  var atOpponentGameboard = rubyRageBattleMode.returnCtxOpponentGameboard();
+  var reassembledGameboard = rubyRageBattleMode.reAssembleGameboard(rawGameboardData);
+  rubyRageBattleMode.renderOpponentsSittingRubymons( reassembledGameboard, atOpponentGameboard);
 });
+
+//////////////////////////////////////////////////////////////////////////////
+// PUSHER RELATED EVENTS & FUNCTIONS
+//////////////////////////////////////////////////////////////////////////////
 
 $('#battle-button').click(function(){
   // startSendingRequest();
-  setInterval(startSendingRequest, 1000);
+  setInterval(startSendingRequest, 100);
 })
 
 function startSendingRequest() {
   $.ajax({
     url: "/games/startBroadcasting",
-    type: "get",
-    data: "json"
+    type: "post",
+    dataType: "json",
+    data: {"mySittingRubymonsPosition": gameboardInplay,
+           "mySittingRubymonsPosition"}
   })
 }
+
+

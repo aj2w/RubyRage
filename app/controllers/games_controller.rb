@@ -10,14 +10,15 @@ class GamesController < ApplicationController
   end
 
   def pusher
-    Pusher['rubyrage_thomas'].trigger('my_event', { message: 'hello world' })
+    datasent = params[:note]
+    Pusher['rubyrage_thomas'].trigger('my_event', { message: "#{datasent}" })
   end
 
-  def startBroadcasting
-    Pusher['rubyrage_thomas'].trigger('broadcasting', {
-      message: 'start broadcasting game data'
-    })
+  def gameBroadcast
+    mySittingRubymonsPosition = params[:mySittingRubymonsPosition].values
+    Pusher['rubyrage_thomas'].trigger('gameBroadcast', mySittingRubymonsPosition)
   end
 
 end
+
 

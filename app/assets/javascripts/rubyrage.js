@@ -418,7 +418,7 @@ function puyoSize() {
   var z = 0;
   for ( var y = 1; 0 <= y; --y ) {
     for ( var x = 0; x < 2; ++x ) {
-      if ( currentRubyBox[ x ][ y ] != 0 ) {
+      if ( currentRubyBox[ x ][ y ] !== 0 ) {
         z++;
       }
     }
@@ -480,5 +480,51 @@ function renderAll() {
   renderNextRubymons();
 }
 
+//////////////////////////////////////////////////////////////////////////////
+// BATTLE MODE ONLY
+//////////////////////////////////////////////////////////////////////////////
 
+var rubyRageBattleMode = {
+  opponentGameboard: $('#opponent-gameboard')[0],
+  returnCtxOpponentGameboard: function() {
+    return this.opponentGameboard.getContext( '2d' );
+  },
+  reAssembleGameboard: function(incomingGameboardData) {
+    var reassembledGameboard = [];
+    var twoDimArrayLength = incomingGameboardData.length;
+    for (i = 0; i < twoDimArrayLength; i++) {
+      var subarray = _.map(incomingGameboardData[i], function(string) { return parseInt(string, 10); });
+      reassembledGameboard.push( subarray );
+    }
+    return reassembledGameboard;
+  },
+  renderOpponentsSittingRubymons: function(reassembledGameboard, ctxObject) {
+    for ( var x = 0; x < gameboardColumns; x++ ) {
+      for ( var y = 0; y < gameboardRows ; y++ ) {
+        var selectedRubymon = selectRubymon(reassembledGameboard[ y ][ x ]);
+        showRubymon(ctxObject, selectedRubymon, x, y);
+      }
+    }
+  }
+};
+
+
+
+// function renderOpponentsFallingRubymons() {
+//   for ( var y = 0; y < 2; y++ ) {
+//     for ( var x = 0; x < 2; x++ ) {
+//       var selectedRubymon = selectRubymon(currentRubyBox[ y ][ x ]);
+//       showRubymon(ctxGameboard, selectedRubymon, currentX + x, currentY + y);
+//       // debugger;
+//     }
+//   }
+// }
+
+// function renderOpponentsNextRubymons() {
+//   var upcomingRubymonPair = rubymonPairsPreset[runningRubymonIndex];
+//   for ( var yPosition = 0; yPosition < 2; yPosition++) {
+//     var selectedRubymon = selectRubymon(upcomingRubymonPair[yPosition]);
+//     showRubymon(ctxPreview, selectedRubymon, 0, yPosition);
+//   }
+// }
 
