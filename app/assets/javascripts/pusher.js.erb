@@ -7,9 +7,13 @@ Pusher.log = function(message) {
 };
 
 var pusher = new Pusher('<%= Pusher.key %>');
+// debugger;
 var socketId = null;
 
-var channel = pusher.subscribe('anuj');
+var username = $('.menubar_user').text();
+var usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
+// debugger;
+var channel = pusher.subscribe(usernameWithNoSpaces);
 
 channel.bind('my_event', function(data) {
   // var opponentUpdate = setInterval(updateText(data), 1000);
