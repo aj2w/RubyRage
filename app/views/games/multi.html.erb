@@ -8,16 +8,16 @@
   <%= image_tag 'rubymon3d_sad.png', class: 'rubymon-img', id: 'sad' %>
 </div>
 
-
 <div class="multi">
   <canvas width='300' height='480' id="gameboard"></canvas> <!-- TODO: NEED TO MAKE IT RESPONSIVE -->
   <canvas width='50' height='100' id="preview"></canvas> <!-- TODO: NEED TO MAKE IT RESPONSIVE -->
 
   <canvas width='200'></canvas>
-  <div width='300' height='600' id="opponent"></div>
+  <canvas width='50' height='100' id="opponent-preview"></canvas> <!-- TODO: NEED TO MAKE IT RESPONSIVE -->
+  <canvas width='300' height='480' id="opponent-gameboard"></canvas> <!-- TODO: NEED TO MAKE IT RESPONSIVE -->
 
- <div id="battle-button">Start Battle</div>
+<div id="battle-button">Start Battle</div>
+<a href="/games/dashboard" class="button round">Back to Dashboard</a>
 
-  <br><a href="/games/dashboard" class="button round">Back to Dashboard</a>
 </div>
   <%= javascript_include_tag "rubyrage" %>
