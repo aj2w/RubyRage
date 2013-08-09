@@ -1,3 +1,9 @@
 <% @online_users.each do |user| %>
-<%= user.username %>
+<table class="list_of_users" align="center">
+  <tr>
+    <td><%= user.username %></td>
+    <td><button>Battle</button></td>
+  </tr>
+
+</table>
 <% end %>
