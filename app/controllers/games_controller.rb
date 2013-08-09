@@ -7,15 +7,14 @@ class GamesController < ApplicationController
   end
 
   def multi
-    # binding.pry
+    @channelname = params[:username]
+    # @opponent = params[:username]
   end
 
-
-
   def pusher
-    Pusher['thomas'].trigger('my_event', {
+    Pusher[params[:username]].trigger('my_event', {
       message: 'hello world'
-    })
+      })
   end
 end
 
