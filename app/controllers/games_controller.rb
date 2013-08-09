@@ -10,6 +10,8 @@ class GamesController < ApplicationController
     # binding.pry
   end
 
+
+
   def pusher
     Pusher['thomas'].trigger('my_event', {
       message: 'hello world'

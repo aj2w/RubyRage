@@ -4,6 +4,7 @@ Rubyrage::Application.routes.draw do
  resources :users #CHANGE TO BE SPECIFIC
 
  get "log_out" => "sessions#destroy", as: "log_out"
+ get '/sessions/recentsessions' => 'sessions#recentsessions'
  resources :sessions #CHANGE TO BE SPECIFIC
 
  get '/games/dashboard' => 'games#dashboard'
