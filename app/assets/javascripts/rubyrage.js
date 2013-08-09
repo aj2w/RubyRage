@@ -112,8 +112,8 @@ $('#start-button').click(function(){
 //////////////////////////////////////////////////////////////////////////////
 
 function tick() {
-  if ( valid( 0, 1 ) ) {
-      ++currentY;
+  if ( checkIfValidMove( 0, 1 ) ) {
+      currentY++;
       return;
   }
 
@@ -156,14 +156,14 @@ function freeze() {
 function rotate( currentRubyBox ) {
   newX = 0;
   newY = 0;
-  if (currentRubyBox[0][0] != 0 ){
-    if ( currentRubyBox[0][1] != 0 ){  //  **
+  if (currentRubyBox[0][0] !== 0 ){
+    if ( currentRubyBox[0][1] !== 0 ){
         newX = - 1;
                      //  --
-      if(currentY == 13 || gameboardInplay[currentY+1][currentX] != 0 ) {
+      if(currentY === 11 || gameboardInplay[currentY + 1][currentX] !== 0 ) {
         newY--;
       }
-    }else if ( currentRubyBox[1][0] != 0){  //  *-
+    } else if ( currentRubyBox[1][0] !== 0){  //  *-
         newY = 1;                    //  *-
       if(currentX == 5){
         newX--;
@@ -219,7 +219,7 @@ function clear() {
   }
 
   if (is_erased){
-      if (interval != 0) {
+      if (interval !== 0) {
         clearInterval(interval);
         interval = 0;
         inputFlag = false;
@@ -232,7 +232,7 @@ function clear() {
 
   }
 
-  if (interval == 0) {
+  if (interval === 0) {
       clearInterval(rensaInterval);
       deployNewRubymonPair();
       interval = setInterval( tick, tickSpeed );
@@ -278,7 +278,7 @@ function clearPuyo(x,y) {
   var puyo = createRubymon(x,y,gameboardInplay[y][x]);
   var same_puyos = [puyo];
 
-  if( puyo.col == 0 || puyo.col == 'gray') return false;
+  if( puyo.col === 0 || puyo.col == 'gray') return false;
 
   findPuyos(same_puyos,marked);
 
@@ -310,9 +310,9 @@ function findPuyos(same_puyos,marked){
 
   for(var i = 0; i<same_puyos.length; i++){ // THIS FUNCTION CHECKS FOR DUPLICATE PUYO / CAN BE SHORTENED
       if (same_puyos[i].x  == puyo.x
-          && same_puyos[i].y == puyo.y
-          && same_puyos[i].col == puyo.col){
-          return;
+        && same_puyos[i].y == puyo.y
+        && same_puyos[i].col == puyo.col){
+        return;
       }
   }
   same_puyos.push(puyo);
@@ -344,30 +344,29 @@ function keyPress( key ) {
 
   switch ( key ) {
   case 'left':
-    if ( valid( -1, 0 ) && puyoSize() > 1  ) {
+    if ( checkIfValidMove( -1, 0 ) && puyoSize() > 1  ) {
         --currentX;
     }
     break;
   case 'right':
-    if ( valid( 1, 0 ) && puyoSize() > 1  ) {
+    if ( checkIfValidMove( 1, 0 ) && puyoSize() > 1  ) {
         ++currentX;
     }
     break;
   case 'down':
-    if ( valid( 0, 1 ) && puyoSize() > 1 ) {
+    if ( checkIfValidMove( 0, 1 ) && puyoSize() > 1 ) {
         ++currentY;
     }
     break;
   case 'rotate':
     var rotated = rotate( currentRubyBox );
-    //        f0001( rotated );
-    if ( valid( newX, newY, rotated ) ) {
+    if ( checkIfValidMove( newX, newY, rotated ) ) {
         currentRubyBox = rotated;
-        currentX = currentX + newX
-        currentY = currentY + newY
-    } else if ( valid( newX + anotherX, newY + anotherY, rotated ) ) {
+        currentX = currentX + newX;
+        currentY = currentY + newY;
+    } else if ( checkIfValidMove( newX + anotherX, newY + anotherY, rotated ) ) {
       currentRubyBox = rotated;
-      currentX = currentX + newX + anotherX
+      currentX = currentX + newX + anotherX;
       currentY = currentY + newY + anotherY;
     }
     break;
@@ -391,7 +390,7 @@ document.body.onkeydown = function( e ) {
   }
 };
 
-function valid( offsetX, offsetY, newCurrent ) {
+function checkIfValidMove( offsetX, offsetY, newCurrent ) {
   offsetX = currentX + offsetX;
   offsetY = currentY + offsetY;
   newCurrent = newCurrent || currentRubyBox;
