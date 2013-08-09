@@ -10,5 +10,5 @@
 <%= submit_tag "Sign in", :class => 'button' %>
 <% end %>
 
-<a href="/users/new" class="button">Create an account</a>
+<%= link_to 'Create an Account', new_user_path, class:'button', remote: true %>
 
