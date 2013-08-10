@@ -38,6 +38,7 @@ myOwnChannel.bind('promptRequestPopup', function(data) {
   if (response === true) {
     console.log(data.challengerChannelName);
     window.location.replace('/games/multi/' + data.challengerChannelName);
+    $('#channel-name').remove()
   } else {
     console.log("You pressed cancel!");
   }
