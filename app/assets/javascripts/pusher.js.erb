@@ -34,7 +34,13 @@ myOwnChannel.bind('gameBroadcast', function(rawGameboardData) {
 });
 
 myOwnChannel.bind('promptRequestPopup', function(data) {
-  alert(data.message)
+  var response = confirm(data.message);
+  if (response === true) {
+    console.log(data.challengerChannelName);
+    window.location.replace('/games/multi/' + data.challengerChannelName);
+  } else {
+    console.log("You pressed cancel!");
+  }
 });
 
 //////////////////////////////////////////////////////////////////////////////
@@ -72,12 +78,13 @@ function requestBattle() {
     url: "/games/multi/requestBattle",
     type: "post",
     dataType: "json",
-    data: {"opponentChannelName": opponentChannelName}
+    data: {"opponentChannelName": opponentChannelName,
+           "challengerChannelName": usernameWithNoSpaces}
   })
 }
 
-$('#channel-name').load(function(){
-  console.log("div has been loaded")
-})
+$( '#channel-name' ).ready(function() {
+  requestBattle();
+});
 
 

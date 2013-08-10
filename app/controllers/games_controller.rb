@@ -34,7 +34,11 @@ class GamesController < ApplicationController
 
   def requestBattle
     opponentChannelName = params[:opponentChannelName]
-    Pusher[opponentChannelName].trigger('promptRequestPopup', { message: "#{@current_user.username} has requested a battle with you!" })
+    challengerChannelName = params[:challengerChannelName]
+    Pusher[opponentChannelName].trigger('promptRequestPopup', {
+      message: "#{@current_user.username} has requested a battle with you!",
+      challengerChannelName: challengerChannelName
+      })
   end
 
 end
