@@ -9,6 +9,7 @@ Rubyrage::Application.routes.draw do
 
  get '/games/dashboard' => 'games#dashboard'
  get '/games/single' => 'games#single'
+ get '/games/multi/requestbattle' => 'games#requestBattle', as: "requestbattle"
  get '/games/multi/:username' => 'games#multi', as: "games_multi"
  get '/games/pusher' => 'games#pusher'
  post '/games/gameBroadcast' => 'games#gameBroadcast'

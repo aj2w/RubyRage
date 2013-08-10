@@ -33,6 +33,10 @@ myOwnChannel.bind('gameBroadcast', function(rawGameboardData) {
   rubyRageBattleMode.renderOpponentsNextRubymons( reassembledUpcomingRubymonPair, atOpponentPreview);
 });
 
+myOwnChannel.bind('requestBattle', function(data) {
+  alert(data.message)
+});
+
 //////////////////////////////////////////////////////////////////////////////
 // GRAB OPPONENT'S USERID (/ CHANNEL NAME)
 //////////////////////////////////////////////////////////////////////////////
@@ -49,8 +53,6 @@ $('#battle-button').click(function(){
   setInterval(startSendingRequest, 300);
 })
 
-
-
 function startSendingRequest() {
   $.ajax({
     url: "/games/gameBroadcast",
@@ -62,6 +64,15 @@ function startSendingRequest() {
            "myCurrentXposition": currentX,
            "myCurrentYposition": currentY,
            "myUpcomingRubymonPair": rubymonPairsPreset[runningRubymonIndex]}
+  })
+}
+
+function requestBattle() {
+  $.ajax({
+    url: "/games/multi/requestBattle",
+    type: "post",
+    dataType: "json",
+    data: {"opponentChannelName": opponentChannelName}
   })
 }
 

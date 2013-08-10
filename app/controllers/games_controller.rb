@@ -31,6 +31,12 @@ class GamesController < ApplicationController
       myUpcomingRubymonPair: myUpcomingRubymonPair
       })
   end
+
+  def requestBattle
+    opponentChannelName = params[:opponentChannelName]
+    Pusher[opponentChannelName].trigger('promptRequestPopup', { message: "#{@current_user.username} has requested a battle with you!" })
+  end
+
 end
 
 
