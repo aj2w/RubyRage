@@ -60,6 +60,10 @@ $('#battle-button').click(function(){
   setInterval(startSendingRequest, 300);
 })
 
+$('.battle-now').click(function(){
+  console.log("hello")
+})
+
 function startSendingRequest() {
   $.ajax({
     url: "/games/gameBroadcast",

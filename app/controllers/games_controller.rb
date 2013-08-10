@@ -7,6 +7,7 @@ class GamesController < ApplicationController
   end
 
   def multi
+    # binding.pry
     @channelname = params[:username]
   end
 
