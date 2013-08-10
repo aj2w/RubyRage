@@ -74,3 +74,13 @@ nav.top-bar {
   background-position: center;
 }*/
 
+.list_of_users {
+  background: #FF8566;
+  border: none;
+  text-align: center;
+}
+
+#channel-name {
+  display: none;
+}
+

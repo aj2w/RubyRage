@@ -7,11 +7,13 @@ class GamesController < ApplicationController
   end
 
   def multi
+    @channelname = params[:username]
   end
 
   def pusher
-    datasent = params[:note]
-    Pusher['rubyrage_thomas'].trigger('my_event', { message: "#{datasent}" })
+    Pusher[params[:username]].trigger('my_event', {
+      message: 'hello world'
+    })
   end
 
   def gameBroadcast

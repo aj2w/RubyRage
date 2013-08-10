@@ -3,8 +3,8 @@
     <a href="/games/single" class="button round button_users">Single Player</a>
 
   </div>
-  <div class="right_selection large-6 centered columns">
-    <a href="/games/multi" class="button round button_users">Multiplayer</a>
-  </div>
+  <%= link_to 'Multiplayer', sessions_recentsessions_path, class:'button round button_users', remote: true %>
+  <div class="dropdown_current_users"></div>
+</div>
 </div>
 

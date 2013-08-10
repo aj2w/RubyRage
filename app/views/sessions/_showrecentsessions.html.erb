@@ -1,0 +1,8 @@
+<% @online_users.each do |user| %>
+<table class="list_of_users" align="center">
+  <tr>
+    <td><%= user.username %></td>
+    <td><%= link_to 'Battle', games_multi_path(:username => user.username) %></td>
+  </tr>
+</table>
+<% end %>
