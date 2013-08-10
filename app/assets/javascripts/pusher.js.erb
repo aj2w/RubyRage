@@ -8,24 +8,22 @@ Pusher.log = function(message) {
 
 
 var pusher = new Pusher('<%= Pusher.key %>');
-// debugger;
 var socketId = null;
 
 var username = $('.menubar_user').text();
 var usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
-// debugger;
 var channel = pusher.subscribe(usernameWithNoSpaces);
 
 channel.bind('my_event', function(data) {
-  // var opponentUpdate = setInterval(updateText(data), 1000);
   $('#opponent').append(data.message);
-  // alert(data.message);
 });
-
 
 $('#battle-button').click(function(){
   setInterval(startSendingRequest, 1000);
 })
+
+var tempchannelname = $('#channel-name').text();
+var channelname = tempchannelname.replace(/^\s+|\s+$/g, "");
 
 function startSendingRequest() {
   $.ajax({

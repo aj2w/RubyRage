@@ -8,7 +8,6 @@ class GamesController < ApplicationController
 
   def multi
     @channelname = params[:username]
-    # @opponent = params[:username]
   end
 
   def pusher
