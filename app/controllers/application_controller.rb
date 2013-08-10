@@ -10,12 +10,12 @@ class ApplicationController < ActionController::Base
   end
 
   def update_last_seen
-    if @current_user
+    # if @current_user == true
       @current_user.last_seen = DateTime.now
       @current_user.save
       # Below needs to be changed to 5 minutes or so in production
       @online_users = User.where("last_seen > ?",120.minutes.ago.to_s(:db))
-    end
+
   end
 
   def admin

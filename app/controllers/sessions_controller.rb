@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_filter :update_last_seen, only: [:new, :create]
+
   def new
   end
 
