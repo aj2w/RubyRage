@@ -15,8 +15,21 @@ channel.bind('my_event', function(data) {
 
 channel.bind('gameBroadcast', function(rawGameboardData) {
   var atOpponentGameboard = rubyRageBattleMode.returnCtxOpponentGameboard();
-  var reassembledGameboard = rubyRageBattleMode.reAssembleGameboard(rawGameboardData);
+  var atOpponentPreview = rubyRageBattleMode.returnCtxOpponentPreview();
+
+  var reassembledGameboard = rubyRageBattleMode.reassembleTwoDimArray(rawGameboardData.mySittingRubymonsPosition);
+  var reassembledCurrentRubyBox = rubyRageBattleMode.reassembleTwoDimArray(rawGameboardData.myFallingRubymonsPosition);
+  var reassembledUpcomingRubymonPair = _.map(rawGameboardData.myUpcomingRubymonPair,
+    function(string) {
+      return parseInt(string);
+    }
+  );
+  var myCurrentXposition = parseInt(rawGameboardData.myCurrentXposition);
+  var myCurrentYposition = parseInt(rawGameboardData.myCurrentYposition);
+  rubyRageBattleMode.paintOverOpponents( atOpponentGameboard, atOpponentPreview);
   rubyRageBattleMode.renderOpponentsSittingRubymons( reassembledGameboard, atOpponentGameboard);
+  rubyRageBattleMode.renderOpponentsFallingRubymons( reassembledCurrentRubyBox , atOpponentGameboard, myCurrentXposition, myCurrentYposition);
+  rubyRageBattleMode.renderOpponentsNextRubymons( reassembledUpcomingRubymonPair, atOpponentPreview);
 });
 
 //////////////////////////////////////////////////////////////////////////////
@@ -30,11 +43,14 @@ $('#battle-button').click(function(){
 
 function startSendingRequest() {
   $.ajax({
-    url: "/games/startBroadcasting",
+    url: "/games/gameBroadcast",
     type: "post",
     dataType: "json",
     data: {"mySittingRubymonsPosition": gameboardInplay,
-           "mySittingRubymonsPosition"}
+           "myFallingRubymonsPosition": currentRubyBox,
+           "myCurrentXposition": currentX,
+           "myCurrentYposition": currentY,
+           "myUpcomingRubymonPair": rubymonPairsPreset[runningRubymonIndex]}
   })
 }
 

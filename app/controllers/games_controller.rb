@@ -16,7 +16,18 @@ class GamesController < ApplicationController
 
   def gameBroadcast
     mySittingRubymonsPosition = params[:mySittingRubymonsPosition].values
-    Pusher['rubyrage_thomas'].trigger('gameBroadcast', mySittingRubymonsPosition)
+    myFallingRubymonsPosition = params[:myFallingRubymonsPosition].values
+    myCurrentXposition        = params[:myCurrentXposition]
+    myCurrentYposition        = params[:myCurrentYposition]
+    myUpcomingRubymonPair     = params[:myUpcomingRubymonPair]
+    # binding.pry
+    Pusher['rubyrage_thomas'].trigger('gameBroadcast', {
+      mySittingRubymonsPosition: mySittingRubymonsPosition,
+      myFallingRubymonsPosition: myFallingRubymonsPosition,
+      myCurrentXposition: myCurrentXposition,
+      myCurrentYposition: myCurrentYposition,
+      myUpcomingRubymonPair: myUpcomingRubymonPair
+      })
   end
 
 end

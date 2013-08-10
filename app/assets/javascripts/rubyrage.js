@@ -453,7 +453,6 @@ function renderFallingRubymons() {
     for ( var x = 0; x < 2; x++ ) {
       var selectedRubymon = selectRubymon(currentRubyBox[ y ][ x ]);
       showRubymon(ctxGameboard, selectedRubymon, currentX + x, currentY + y);
-      // debugger;
     }
   }
 }
@@ -486,10 +485,14 @@ function renderAll() {
 
 var rubyRageBattleMode = {
   opponentGameboard: $('#opponent-gameboard')[0],
+  opponentPreview: $('#opponent-preview')[0],
   returnCtxOpponentGameboard: function() {
     return this.opponentGameboard.getContext( '2d' );
   },
-  reAssembleGameboard: function(incomingGameboardData) {
+  returnCtxOpponentPreview: function() {
+    return this.opponentPreview.getContext( '2d' );
+  },
+  reassembleTwoDimArray: function(incomingGameboardData) {
     var reassembledGameboard = [];
     var twoDimArrayLength = incomingGameboardData.length;
     for (i = 0; i < twoDimArrayLength; i++) {
@@ -505,26 +508,35 @@ var rubyRageBattleMode = {
         showRubymon(ctxObject, selectedRubymon, x, y);
       }
     }
+  },
+  renderOpponentsFallingRubymons: function(reassembledCurrentRubyBox, ctxObject, currentXposition, currentYposition) {
+    for ( var y = 0; y < 2; y++ ) {
+      for ( var x = 0; x < 2; x++ ) {
+        var selectedRubymon = selectRubymon(reassembledCurrentRubyBox[ y ][ x ]);
+        showRubymon(ctxObject, selectedRubymon, currentXposition + x, currentYposition + y);
+      }
+    }
+  },
+  renderOpponentsNextRubymons: function(reassembledUpcomingRubymonPair, ctxObject) {
+    for ( var yPosition = 0; yPosition < 2; yPosition++) {
+      var selectedRubymon = selectRubymon(reassembledUpcomingRubymonPair[yPosition]);
+      showRubymon(ctxObject, selectedRubymon, 0, yPosition);
+    }
+  },
+  paintOverOpponents: function(ctxObjectGameboard, ctxObjectPreview) {
+    ctxObjectGameboard.fillStyle = 'lightgrey';
+    ctxObjectGameboard.fillRect( 0, 0, gameboardWitdh, gameboardHeight );
+    ctxObjectPreview.fillStyle = 'lightblue';
+    ctxObjectPreview.fillRect( 0, 0, previewWitdh, previewdHeight );
   }
 };
 
 
 
-// function renderOpponentsFallingRubymons() {
-//   for ( var y = 0; y < 2; y++ ) {
-//     for ( var x = 0; x < 2; x++ ) {
-//       var selectedRubymon = selectRubymon(currentRubyBox[ y ][ x ]);
-//       showRubymon(ctxGameboard, selectedRubymon, currentX + x, currentY + y);
-//       // debugger;
-//     }
-//   }
-// }
 
-// function renderOpponentsNextRubymons() {
-//   var upcomingRubymonPair = rubymonPairsPreset[runningRubymonIndex];
-//   for ( var yPosition = 0; yPosition < 2; yPosition++) {
-//     var selectedRubymon = selectRubymon(upcomingRubymonPair[yPosition]);
-//     showRubymon(ctxPreview, selectedRubymon, 0, yPosition);
-//   }
-// }
+
+
+
+
+
 

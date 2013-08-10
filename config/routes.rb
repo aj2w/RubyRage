@@ -10,6 +10,6 @@ Rubyrage::Application.routes.draw do
  get '/games/single' => 'games#single'
  get '/games/multi/' => 'games#multi'
  get '/games/pusher' => 'games#pusher'
- post '/games/startBroadcasting' => 'games#startBroadcasting'
+ post '/games/gameBroadcast' => 'games#gameBroadcast'
 
  end
