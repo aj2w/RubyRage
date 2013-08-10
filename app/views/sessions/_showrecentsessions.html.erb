@@ -1,8 +1,11 @@
 <% @online_users.each do |user| %>
 <table class="list_of_users" align="center">
+  <% if user.username != @current_user.username %>
   <tr>
-    <td><%= user.username if user.username != @current_user.username %></td>
-    <td><%= link_to 'Battle', games_multi_path(:username => user.username) if user.username != @current_user.username %></td>
+    <td><%= user.username %></td>
+    <td><div class="battle-<%= user.id %>" id="<%=user.username%>">Battle</div><td>
+    <!-- <td><%= link_to 'Battle', games_multi_path(:username => user.username), class: "user.id" %></td> -->
   </tr>
+  <% end %>
 </table>
 <% end %>
