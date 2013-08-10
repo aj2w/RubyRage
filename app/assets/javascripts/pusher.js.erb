@@ -6,23 +6,18 @@ Pusher.log = function(message) {
   }
 };
 
+//////////////////////////////////////////////////////////////////////////////
+// DEFINE USER'S CHANNEL
+//////////////////////////////////////////////////////////////////////////////
 
 var pusher = new Pusher('<%= Pusher.key %>');
-
-// var channel = pusher.subscribe('rubyrage_thomas');
-
-channel.bind('my_event', function(data) {
-  alert(data.message)
-});
-
 var username = $('.menubar_user').text();
 var usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
-var channel = pusher.subscribe(usernameWithNoSpaces);
+var myOwnChannel = pusher.subscribe(usernameWithNoSpaces);
 
-channel.bind('gameBroadcast', function(rawGameboardData) {
+myOwnChannel.bind('gameBroadcast', function(rawGameboardData) {
   var atOpponentGameboard = rubyRageBattleMode.returnCtxOpponentGameboard();
   var atOpponentPreview = rubyRageBattleMode.returnCtxOpponentPreview();
-
   var reassembledGameboard = rubyRageBattleMode.reassembleTwoDimArray(rawGameboardData.mySittingRubymonsPosition);
   var reassembledCurrentRubyBox = rubyRageBattleMode.reassembleTwoDimArray(rawGameboardData.myFallingRubymonsPosition);
   var reassembledUpcomingRubymonPair = _.map(rawGameboardData.myUpcomingRubymonPair,
@@ -39,30 +34,37 @@ channel.bind('gameBroadcast', function(rawGameboardData) {
 });
 
 //////////////////////////////////////////////////////////////////////////////
+// GRAB OPPONENT'S USERID (/ CHANNEL NAME)
+//////////////////////////////////////////////////////////////////////////////
+
+var rawOpponentChannelName = $('#channel-name').text();
+var opponentChannelName = rawOpponentChannelName.replace(/^\s+|\s+$/g, "");
+
+//////////////////////////////////////////////////////////////////////////////
 // PUSHER RELATED EVENTS & FUNCTIONS
 //////////////////////////////////////////////////////////////////////////////
 
-
-
 $('#battle-button').click(function(){
   // startSendingRequest();
-  setInterval(startSendingRequest, 100);
+  setInterval(startSendingRequest, 300);
 })
 
-var tempchannelname = $('#channel-name').text();
-var channelname = tempchannelname.replace(/^\s+|\s+$/g, "");
+
 
 function startSendingRequest() {
   $.ajax({
     url: "/games/gameBroadcast",
     type: "post",
     dataType: "json",
-    data: {"mySittingRubymonsPosition": gameboardInplay,
+    data: {"opponentChannelName": opponentChannelName,
+           "mySittingRubymonsPosition": gameboardInplay,
            "myFallingRubymonsPosition": currentRubyBox,
            "myCurrentXposition": currentX,
            "myCurrentYposition": currentY,
            "myUpcomingRubymonPair": rubymonPairsPreset[runningRubymonIndex]}
   })
 }
+
+
 
 
