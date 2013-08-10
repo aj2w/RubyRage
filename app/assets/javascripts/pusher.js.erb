@@ -74,19 +74,12 @@ function startSendingRequest() {
   })
 }
 
-function requestBattle() {
+function requestBattle(targetPlayerUsername) {
   $.ajax({
     url: "/games/multi/requestBattle",
     type: "post",
     dataType: "json",
-    data: {"opponentChannelName": opponentChannelName,
+    data: {"opponentChannelName": targetPlayerUsername,
            "challengerChannelName": usernameWithNoSpaces}
   })
 }
-
-
-$( '#channel-name' ).ready(function() {
-  requestBattle();
-});
-
-

@@ -1,1 +1,4 @@
 $('.dropdown_current_users').html("<%=j render 'showrecentsessions' %>").show();
+$('.request-battle').click(function(){
+  requestBattle(this.id);
+})
