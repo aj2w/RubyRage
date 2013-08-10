@@ -33,7 +33,7 @@ myOwnChannel.bind('gameBroadcast', function(rawGameboardData) {
   rubyRageBattleMode.renderOpponentsNextRubymons( reassembledUpcomingRubymonPair, atOpponentPreview);
 });
 
-myOwnChannel.bind('requestBattle', function(data) {
+myOwnChannel.bind('promptRequestPopup', function(data) {
   alert(data.message)
 });
 
@@ -45,7 +45,7 @@ var rawOpponentChannelName = $('#channel-name').text();
 var opponentChannelName = rawOpponentChannelName.replace(/^\s+|\s+$/g, "");
 
 //////////////////////////////////////////////////////////////////////////////
-// PUSHER RELATED EVENTS & FUNCTIONS
+// BATTLE RELATED EVENTS & FUNCTIONS
 //////////////////////////////////////////////////////////////////////////////
 
 $('#battle-button').click(function(){
@@ -76,6 +76,8 @@ function requestBattle() {
   })
 }
 
-
+$('#channel-name').load(function(){
+  console.log("div has been loaded")
+})
 
 
