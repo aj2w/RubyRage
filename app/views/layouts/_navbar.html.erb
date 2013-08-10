@@ -16,15 +16,15 @@
     <ul class="right">
       <li class="divider hide-for-small"></li>
       <li class="has-dropdown not-click">
-          <% if @current_user %>
         <a class="menubar_user">
+          <% if @current_user %>
           <%= @current_user.username %>
           <% else %>
           <%= link_to "Create Account", new_user_path %>
+          <% end %>
         </a>
-                  <% end %>
-        <% if @current_user %>
         <ul class="dropdown">
+        <% if @current_user %>
           <li class><%= link_to "Sign Out", log_out_path %></li>
         </ul>
         <% end %>
