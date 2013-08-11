@@ -39,7 +39,9 @@ class GamesController < ApplicationController
       message: "#{@current_user.username} has requested a battle with you!",
       challengerChannelName: challengerChannelName
       })
-    # render :nothing => true
+    respond_to do |format|
+      format.js {}
+    end
   end
 
   def challengeResponse
@@ -54,7 +56,7 @@ class GamesController < ApplicationController
       message: messageToChallenger,
       responseToChallenge: responseToChallenge,
       opponentChannelName: @current_user.username
-    })
+      })
   end
 
   def triggerBattleGame
