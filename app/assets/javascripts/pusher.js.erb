@@ -35,14 +35,24 @@ myOwnChannel.bind('gameBroadcast', function(rawGameboardData) {
 
 myOwnChannel.bind('promptRequestPopup', function(data) {
   var response = confirm(data.message);
-  if (response === true) {
-    console.log(data.challengerChannelName);
-    window.location.replace('/games/multi/' + data.challengerChannelName);
-    $('#channel-name').remove()
+  if (response == true) {
+    window.location = '/games/multi/' + data.challengerChannelName;
+    challengeResponse(true, data.challengerChannelName);
+    // window.location.replace('/games/multi/' + data.challengerChannelName);
   } else {
-    console.log("You pressed cancel!");
+    challengeResponse(false, data.challengerChannelName);
   }
 });
+
+myOwnChannel.bind('challengeResponse', function(data) {
+  alert(data.message);
+  if (data.responseToChallenge === "true") {
+    alert("now you can start a countdown and start-game");
+  } else {
+    window.location.replace('/games/dashboard');
+  }
+});
+
 
 //////////////////////////////////////////////////////////////////////////////
 // GRAB OPPONENT'S USERID (/ CHANNEL NAME)
@@ -86,4 +96,25 @@ function requestBattle(targetPlayerUsername) {
     data: {"opponentChannelName": targetPlayerUsername,
            "challengerChannelName": usernameWithNoSpaces}
   })
+}
+
+function challengeResponse(answer, challengerUsername) {
+  $.ajax({
+    url: "/games/multi/challengeResponse",
+    type: "post",
+    dataType: "json",
+    data: {"opponentChannelName": challengerUsername,
+           "responseToChallenge": answer}
+  })
+}
+
+function returnCommonChannel(opponentChannelName) {
+  var commonChannelName;
+  if (opponentChannelName < usernameWithNoSpaces) {
+    commonChannelName = opponentChannelName + "_" + usernameWithNoSpaces;
+    return commonChannelName;
+  } else {
+    commonChannelName = usernameWithNoSpaces + "_" + opponentChannelName;
+    return commonChannelName;
+  }
 }

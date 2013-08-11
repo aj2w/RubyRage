@@ -42,6 +42,20 @@ class GamesController < ApplicationController
       })
   end
 
+  def challengeResponse
+    opponentChannelName = params[:opponentChannelName]
+    responseToChallenge = params[:responseToChallenge]
+    if responseToChallenge == "true"
+      messageToChallenger = "'#{@current_user.username}' has accepted your challenge! \nClick 'Ok' to start the countdown."
+    else
+      messageToChallenger = "'#{@current_user.username}' has rejected your challenge. \nClick 'Ok' to go back to dashboard."
+    end
+    Pusher[opponentChannelName].trigger('challengeResponse', {
+      message: messageToChallenger,
+      responseToChallenge: responseToChallenge
+    })
+  end
+
 end
 
 
