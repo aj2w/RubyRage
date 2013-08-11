@@ -1,18 +1,18 @@
 
 // Enable pusher logging - don't include this in production
-Pusher.log = function(message) {
-  if (window.console && window.console.log) {
-    window.console.log(message);
-  }
-};
+// Pusher.log = function(message) {
+//   if (window.console && window.console.log) {
+//     window.console.log(message);
+//   }
+// };
 
 //////////////////////////////////////////////////////////////////////////////
 // DEFINE USER'S CHANNELS
 //////////////////////////////////////////////////////////////////////////////
 // 'http://d09eb96f1aef0dea4b31:57d70f45d23770529a1e@api.pusherapp.com/apps/51516'
 var pusher = new Pusher('d09eb96f1aef0dea4b31');
-var username = $('.menubar_user').text();
-var usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
+var username;
+var usernameWithNoSpaces;
 var myOwnChannel;
 var commonChannel;
 var opponentChannelName;
@@ -112,7 +112,7 @@ function establishOpponentChannel() {
 }
 
 function establishMyOwnChannel() {
-  username = $('.menubar_user').text();
+  var username = $('.menubar_user').text();
   usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
   myOwnChannel = pusher.subscribe(usernameWithNoSpaces);
 }
