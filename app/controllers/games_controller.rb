@@ -17,39 +17,42 @@ class GamesController < ApplicationController
   # end
 
   def gamebroadcast
+    # opponentChannelName = params[:opponentChannelName]
+    # mySittingRubymonsPosition = params[:mySittingRubymonsPosition].values
+    # myFallingRubymonsPosition = params[:myFallingRubymonsPosition].values
+    # myCurrentXposition        = params[:myCurrentXposition]
+    # myCurrentYposition        = params[:myCurrentYposition]
+    # myUpcomingRubymonPair     = params[:myUpcomingRubymonPair]
+
+    # respond_to do |format|
+    #   # format.html
+    #   json_response = Pusher[opponentChannelName].trigger('gamebroadcast', {
+    #     mySittingRubymonsPosition: mySittingRubymonsPosition,
+    #     myFallingRubymonsPosition: myFallingRubymonsPosition,
+    #     myCurrentXposition: myCurrentXposition,
+    #     myCurrentYposition: myCurrentYposition,
+    #     myUpcomingRubymonPair: myUpcomingRubymonPair
+    #   })
+    #   format.json { render :json => json_response }
+    # end
+
     opponentChannelName = params[:opponentChannelName]
     mySittingRubymonsPosition = params[:mySittingRubymonsPosition].values
     myFallingRubymonsPosition = params[:myFallingRubymonsPosition].values
     myCurrentXposition        = params[:myCurrentXposition]
     myCurrentYposition        = params[:myCurrentYposition]
     myUpcomingRubymonPair     = params[:myUpcomingRubymonPair]
-
-    respond_to do |format|
-      # format.html
-      json_response = Pusher[opponentChannelName].trigger('gamebroadcast', {
-        mySittingRubymonsPosition: mySittingRubymonsPosition,
-        myFallingRubymonsPosition: myFallingRubymonsPosition,
-        myCurrentXposition: myCurrentXposition,
-        myCurrentYposition: myCurrentYposition,
-        myUpcomingRubymonPair: myUpcomingRubymonPair
+    Pusher[opponentChannelName].trigger('gamebroadcast', {
+      mySittingRubymonsPosition: mySittingRubymonsPosition,
+      myFallingRubymonsPosition: myFallingRubymonsPosition,
+      myCurrentXposition: myCurrentXposition,
+      myCurrentYposition: myCurrentYposition,
+      myUpcomingRubymonPair: myUpcomingRubymonPair
       })
-      format.json { render :json => json_response }
-    end
+
   end
 
-  # opponentChannelName = params[:opponentChannelName]
-  # mySittingRubymonsPosition = params[:mySittingRubymonsPosition].values
-  # myFallingRubymonsPosition = params[:myFallingRubymonsPosition].values
-  # myCurrentXposition        = params[:myCurrentXposition]
-  # myCurrentYposition        = params[:myCurrentYposition]
-  # myUpcomingRubymonPair     = params[:myUpcomingRubymonPair]
-  # Pusher[opponentChannelName].trigger('gamebroadcast', {
-  #   mySittingRubymonsPosition: mySittingRubymonsPosition,
-  #   myFallingRubymonsPosition: myFallingRubymonsPosition,
-  #   myCurrentXposition: myCurrentXposition,
-  #   myCurrentYposition: myCurrentYposition,
-  #   myUpcomingRubymonPair: myUpcomingRubymonPair
-  #   })
+
 
 
   def requestBattle
