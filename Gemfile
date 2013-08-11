@@ -18,6 +18,7 @@ end
 
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'sqlite3'
   gem 'pry-rails'           # Causes rails console to open pry
                             # https://github.com/rweng/pry-rails

@@ -10,7 +10,8 @@ Pusher.log = function(message) {
 // DEFINE USER'S CHANNELS
 //////////////////////////////////////////////////////////////////////////////
 // 'http://d09eb96f1aef0dea4b31:57d70f45d23770529a1e@api.pusherapp.com/apps/51516'
-var pusher = new Pusher('d09eb96f1aef0dea4b31');
+
+var pusher = new Pusher(<%= ENV['PUSHER_KEY'] %>);
 var usernameWithNoSpaces;
 var myOwnChannel;
 var commonChannel;
