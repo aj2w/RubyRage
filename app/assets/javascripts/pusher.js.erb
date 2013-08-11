@@ -112,7 +112,7 @@ function establishOpponentChannel() {
 }
 
 function establishMyOwnChannel() {
-  var username = $('.menubar_user').text();
+  username = $('.menubar_user').text();
   usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
   myOwnChannel = pusher.subscribe(usernameWithNoSpaces);
 }
