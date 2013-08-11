@@ -10,7 +10,7 @@
 // DEFINE USER'S CHANNELS
 //////////////////////////////////////////////////////////////////////////////
 // 'http://d09eb96f1aef0dea4b31:57d70f45d23770529a1e@api.pusherapp.com/apps/51516'
-var pusher = new Pusher('d09eb96f1aef0dea4b31');
+var pusher;
 var usernameWithNoSpaces;
 var myOwnChannel;
 var commonChannel;
@@ -111,6 +111,7 @@ function establishOpponentChannel() {
 }
 
 function establishMyOwnChannel() {
+  var pusher = new Pusher('d09eb96f1aef0dea4b31');
   var username = $('.menubar_user').text();
   usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
   myOwnChannel = pusher.subscribe(usernameWithNoSpaces);
