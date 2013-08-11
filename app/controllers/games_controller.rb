@@ -40,7 +40,7 @@ class GamesController < ApplicationController
       challengerChannelName: challengerChannelName
       })
     respond_to do |format|
-      format.js {}
+      format.js { render :layout => false }
     end
   end
 
