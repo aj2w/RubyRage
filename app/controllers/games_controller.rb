@@ -32,16 +32,13 @@ class GamesController < ApplicationController
       })
   end
 
-  def requestBattle
+  def requestBattle, :controller => '/multi'
     opponentChannelName = params[:opponentChannelName]
     challengerChannelName = params[:challengerChannelName]
     Pusher[opponentChannelName].trigger('promptRequestPopup', {
       message: "#{@current_user.username} has requested a battle with you!",
       challengerChannelName: challengerChannelName
       })
-    respond_to do |format|
-      format.js { render :layout => false }
-    end
   end
 
   def challengeResponse
