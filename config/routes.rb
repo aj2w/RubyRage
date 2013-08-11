@@ -1,11 +1,11 @@
 Rubyrage::Application.routes.draw do
  root :to => 'welcome#index'
 
- resources :users #CHANGE TO BE SPECIFIC
+ resources :users
 
  get "log_out" => "sessions#destroy", as: "log_out"
  get '/sessions/recentsessions' => 'sessions#recentsessions'
- resources :sessions #CHANGE TO BE SPECIFIC
+ resources :sessions
 
  get '/games/dashboard' => 'games#dashboard'
  get '/games/single' => 'games#single'

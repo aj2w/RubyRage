@@ -10,9 +10,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to new_session_path, notice: "Signed up!"
+      session[:user_id] = @user.id
+      redirect_to games_dashboard_path, notice: "Signed up!"
     else
-      render "new"
+      flash[:notice] = "User exists."
+      redirect_to new_session_path
     end
   end
 end
