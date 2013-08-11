@@ -7,15 +7,20 @@ Pusher.log = function(message) {
 };
 
 //////////////////////////////////////////////////////////////////////////////
-// DEFINE USER'S CHANNEL
+// DEFINE USER'S CHANNELS
 //////////////////////////////////////////////////////////////////////////////
 
 var pusher = new Pusher('<%= Pusher.key %>');
-var username = $('.menubar_user').text();
-var usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
-var myOwnChannel = pusher.subscribe(usernameWithNoSpaces);
+var usernameWithNoSpaces;
+var myOwnChannel;
+var commonChannel;
+var opponentChannelName;
+var commonChannelName;
 
-myOwnChannel.bind('gameBroadcast', function(rawGameboardData) {
+establishMyOwnChannel();
+establishCommonChannel();
+
+myOwnChannel.bind('gamebroadcast', function(rawGameboardData) {
   var atOpponentGameboard = rubyRageBattleMode.returnCtxOpponentGameboard();
   var atOpponentPreview = rubyRageBattleMode.returnCtxOpponentPreview();
   var reassembledGameboard = rubyRageBattleMode.reassembleTwoDimArray(rawGameboardData.mySittingRubymonsPosition);
@@ -35,38 +40,40 @@ myOwnChannel.bind('gameBroadcast', function(rawGameboardData) {
 
 myOwnChannel.bind('promptRequestPopup', function(data) {
   var response = confirm(data.message);
-  if (response === true) {
-    console.log(data.challengerChannelName);
-    window.location.replace('/games/multi/' + data.challengerChannelName);
-    $('#channel-name').remove()
+  var battleGameUrl = '/games/multi/' + data.challengerChannelName;
+  var redirectCommand = "window.location.href = '" + battleGameUrl + "';"
+  if (response == true) {
+    setTimeout(redirectCommand, 50);
+    challengeResponse(true, data.challengerChannelName);
   } else {
-    console.log("You pressed cancel!");
+    challengeResponse(false, data.challengerChannelName);
   }
 });
 
-//////////////////////////////////////////////////////////////////////////////
-// GRAB OPPONENT'S USERID (/ CHANNEL NAME)
-//////////////////////////////////////////////////////////////////////////////
+myOwnChannel.bind('challengeResponse', function(data) {
+  alert(data.message);
+  if (data.responseToChallenge === "true") {
+    triggerBattleGame(data.opponentChannelName);
+  } else {
+    window.location.replace('/games/dashboard');
+  }
+});
 
-var rawOpponentChannelName = $('#channel-name').text();
-var opponentChannelName = rawOpponentChannelName.replace(/^\s+|\s+$/g, "");
+// commonChannel.bind('startCountdownAndGo'), function(data) {
+//   startCountdownAndGo();
+// }
+
+myOwnChannel.bind('startCountdownAndGo', function(data) {
+  startCountdownAndGo();
+});
 
 //////////////////////////////////////////////////////////////////////////////
 // BATTLE RELATED EVENTS & FUNCTIONS
 //////////////////////////////////////////////////////////////////////////////
 
-$('#battle-button').click(function(){
-  // startSendingRequest();
-  setInterval(startSendingRequest, 300);
-})
-
-$('.battle-now').click(function(){
-  console.log("hello")
-})
-
 function startSendingRequest() {
   $.ajax({
-    url: "/games/gameBroadcast",
+    url: "/games/gamebroadcast",
     type: "post",
     dataType: "json",
     data: {"opponentChannelName": opponentChannelName,
@@ -87,3 +94,54 @@ function requestBattle(targetPlayerUsername) {
            "challengerChannelName": usernameWithNoSpaces}
   })
 }
+
+function challengeResponse(answer, challengerUsername) {
+  $.ajax({
+    url: "/games/multi/challengeResponse",
+    type: "post",
+    dataType: "json",
+    data: {"opponentChannelName": challengerUsername,
+           "responseToChallenge": answer}
+  })
+}
+
+function establishOpponentChannel() {
+  var rawOpponentChannelName = $('#channel-name').text();
+  opponentChannelName = rawOpponentChannelName.replace(/^\s+|\s+$/g, "");
+}
+
+function establishMyOwnChannel() {
+  var username = $('.menubar_user').text();
+  usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
+  myOwnChannel = pusher.subscribe(usernameWithNoSpaces);
+}
+
+
+function establishCommonChannel() {
+  establishOpponentChannel();
+  if (opponentChannelName < usernameWithNoSpaces) {
+    commonChannelName = opponentChannelName + "_" + usernameWithNoSpaces;
+  } else {
+    commonChannelName = usernameWithNoSpaces + "_" + opponentChannelName;
+  }
+  commonChannel = pusher.subscribe(commonChannelName);
+}
+
+function triggerBattleGame(targetPlayerUsername) {
+  $.ajax({
+    url: "/games/multi/triggerBattleGame",
+    type: "post",
+    dataType: "json",
+    // data: {"commonChannelName": commonChannelName}
+    data: {"opponentChannelName": targetPlayerUsername,
+           "myOwnChannelName": usernameWithNoSpaces}
+  })
+}
+
+function startCountdownAndGo() {
+  setInterval(startSendingRequest, 300);
+  newGame();
+  setInterval( renderAll, 30 );
+}
+
+

@@ -1,13 +1,10 @@
 <%= render 'rubymonset' %>
 
-<div id="start-button">Start Battle</div><br>
-<div id="battle-button">Broadcast Battle</div><br>
-<a href="/games/dashboard" class="button round">Back to Dashboard</a>
-
 <div id="channel-name">
   <%= @channelname %>
 </div>
 
+<a href="/games/dashboard" class="button small">Back to Dashboard</a>
 
 <div class="multi">
   <canvas width='300' height='480' id="gameboard"></canvas> <!-- TODO: NEED TO MAKE IT RESPONSIVE -->

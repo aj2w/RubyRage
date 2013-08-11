@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'brush_strokes';
+  src: url('brush_strokes.ttf');
+}
+
 canvas {
   border: 5px solid #CC6A52;
   margin-top: 60px;
@@ -7,11 +12,12 @@ canvas {
   display: none;
 }
 
-body{
+/*body{
   text-align: center;
   background: #FF8566;
   height: 755px;
-}
+}*/
+
 
 .button_users {
   margin: auto;
@@ -30,7 +36,8 @@ body{
 }
 
 .title {
-  font-family: 'Finger Paint', cursive;
+  font-family: 'brush_strokes', cursive;
+  font-size: 80px;
 }
 
 nav.top-bar {
@@ -84,3 +91,9 @@ nav.top-bar {
   display: none;
 }
 
+.paperbg {
+  background: url('lightpaperfibers.png');
+  background-repeat: repeat;
+  background-attachment:fixed;
+  background-position:center;
+}

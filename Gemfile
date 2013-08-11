@@ -6,6 +6,7 @@ gem 'pusher'
 gem 'jquery-rails'
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'pg'
+gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.
