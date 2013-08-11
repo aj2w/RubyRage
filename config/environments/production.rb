@@ -18,7 +18,7 @@ Rubyrage::Application.configure do
   config.assets.compile = false
   # RAILS_ENV=production bundle exec rake assets:precompile
   config.assets.precompile += %w( rubyrage.js )
-  # config.assets.precompile += %w( pusher.js.erb )
+  config.assets.precompile += %w( pusher.js.erb )
 
   # Generate digests for assets URLs
   config.assets.digest = true
