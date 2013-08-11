@@ -39,7 +39,6 @@ class GamesController < ApplicationController
       message: "#{@current_user.username} has requested a battle with you!",
       challengerChannelName: challengerChannelName
       })
-    post(:format => 'js')
   end
 
   def challengeResponse
