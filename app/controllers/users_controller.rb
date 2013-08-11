@@ -5,8 +5,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  # This is a POST and doesn't need a view
-  # Instead it redirects or renders
   def create
     @user = User.new(params[:user])
     if @user.save

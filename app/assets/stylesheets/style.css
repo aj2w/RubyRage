@@ -10,7 +10,10 @@ canvas {
 body{
   text-align: center;
   background: #FF8566;
-  height: 800px;
+  position: relative;
+top:0;
+bottom:0;
+}
 }
 
 .button_users {

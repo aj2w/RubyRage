@@ -1,0 +1,32 @@
+USED
+                   root        /                                    welcome#index
+
+                        POST   /users(.:format)                     users#create
+               new_user GET    /users/new(.:format)                 users#new
+
+                log_out GET    /log_out(.:format)                   sessions#destroy
+sessions_recentsessions GET    /sessions/recentsessions(.:format)   sessions#recentsessions
+
+               sessions GET    /sessions(.:format)                  sessions#index
+                        POST   /sessions(.:format)                  sessions#create
+            new_session GET    /sessions/new(.:format)              sessions#new
+
+        games_dashboard GET    /games/dashboard(.:format)           games#dashboard
+           games_single GET    /games/single(.:format)              games#single
+          requestbattle POST   /games/multi/requestBattle(.:format) games#requestBattle
+            games_multi GET    /games/multi/:username(.:format)     games#multi
+           games_pusher GET    /games/pusher(.:format)              games#pusher
+    games_gameBroadcast POST   /games/gameBroadcast(.:format)       games#gameBroadcast
+
+
+TO BE DELETED
+                  users GET    /users(.:format)                     users#index
+              edit_user GET    /users/:id/edit(.:format)            users#edit
+                   user GET    /users/:id(.:format)                 users#show
+                        PUT    /users/:id(.:format)                 users#update
+                        DELETE /users/:id(.:format)                 users#destroy
+
+           edit_session GET    /sessions/:id/edit(.:format)         sessions#edit
+                        DELETE /sessions/:id(.:format)              sessions#destroy
+                        PUT    /sessions/:id(.:format)              sessions#update
+                session GET    /sessions/:id(.:format)              sessions#show

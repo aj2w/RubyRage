@@ -1,7 +1,9 @@
 Rubyrage::Application.routes.draw do
  root :to => 'welcome#index'
 
- resources :users
+ # resources :users
+ get '/users/new' => 'users#new', as: "new_user"
+ post '/users' => 'users#create'
 
  get "log_out" => "sessions#destroy", as: "log_out"
  get '/sessions/recentsessions' => 'sessions#recentsessions'

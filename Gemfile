@@ -45,4 +45,5 @@ group :development, :test do
 end
 
 gem 'bcrypt-ruby', require: 'bcrypt'
+gem 'pg'
 
