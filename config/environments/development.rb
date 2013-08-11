@@ -35,7 +35,7 @@ Rubyrage::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
 
   Pusher.app_id = '51516'
   Pusher.key    = 'd09eb96f1aef0dea4b31'
