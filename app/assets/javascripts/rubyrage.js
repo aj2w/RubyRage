@@ -1,3 +1,8 @@
+$('#start-button').click(function(){
+  newGame();
+  setInterval( renderAll, 30 );
+});
+
 
 //////////////////////////////////////////////////////////////////////////////
 // PART 1: GLOBAL VARIABLES - CONSTANT
@@ -173,7 +178,7 @@ function rotate( currentRubyBox ) {
           newX++;
           newY++;
         }
-    } else if ( currentRubyBox[1][0] != 0){ //  -*
+    } else if ( currentRubyBox[1][0] !== 0){ //  -*
         newX = 1;                   //  -*
     }
   }
@@ -190,11 +195,11 @@ function rotate( currentRubyBox ) {
 }
 
 function pauseScreen(){
-  if ( interval != 0 ){
+  if ( interval !== 0 ){
     clearInterval( interval );
     interval = 0;
   } else {
-    interval = setInterval( tick, tickSpeed )
+    interval = setInterval( tick, tickSpeed );
   }
 }
 
@@ -204,7 +209,7 @@ function clear() {
   is_erased = false;
   for ( var y = 0; y < gameboardRows; ++y ) {
     for ( var x = 0; x < gameboardColumns; ++x ) {
-      if ( gameboardInplay[y][x] != 0) {
+      if ( gameboardInplay[y][x] !== 0) {
         if ( clearPuyo(x,y) ) {
             is_erased = true;
         }
@@ -422,7 +427,7 @@ function puyoSize() {
 
 
 //////////////////////////////////////////////////////////////////////////////
-// PART 4: GAME RENDERING
+// PART 5: GAME RENDERING
 //////////////////////////////////////////////////////////////////////////////
 
 function selectRubymon(colorNumber) {
@@ -430,7 +435,7 @@ function selectRubymon(colorNumber) {
 }
 
 function showRubymon(whichCtx, img, xPosition, yPosition) {
-  whichCtx.drawImage( img, 0, 0, 140, 126, eachColumnWidth * xPosition, eachRowHeight * yPosition, 50, 40);
+  whichCtx.drawImage( img, 0, 0, 60, 58, eachColumnWidth * xPosition, eachRowHeight * yPosition, 50, 40);
 }
 
 function renderSittingRubymons() {
@@ -474,7 +479,7 @@ function renderAll() {
 }
 
 //////////////////////////////////////////////////////////////////////////////
-// BATTLE MODE ONLY
+// PART 6: BATTLE MODE ONLY
 //////////////////////////////////////////////////////////////////////////////
 
 var rubyRageBattleMode = {
