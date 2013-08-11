@@ -23,7 +23,7 @@ canvas {
   margin: auto;
   margin-top: 125px;
   padding: 50px;
-  font-family: 'Finger Paint', cursive;
+  font-family: 'brush_strokes', cursive;
 }
 
 .left_selection {
@@ -57,7 +57,7 @@ nav.top-bar {
 }
 
 .navbar_font {
-  font-family: 'Finger Paint', cursive;
+  font-family: 'brush_strokes', cursive;
 }
 
 .top-bar-section li a:not(.button) {
