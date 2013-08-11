@@ -1,3 +1,9 @@
+require 'pusher'
+
+  Pusher.app_id = '51516'
+  Pusher.key    = 'd09eb96f1aef0dea4b31'
+  Pusher.secret = '57d70f45d23770529a1e'
+
 Rubyrage::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 

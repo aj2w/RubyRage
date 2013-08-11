@@ -16,6 +16,7 @@ Rubyrage::Application.configure do
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
+  # RAILS_ENV=production bundle exec rake assets:precompile
   config.assets.precompile += %w( rubyrage.js )
   config.assets.precompile += %w( pusher.js.erb )
 
