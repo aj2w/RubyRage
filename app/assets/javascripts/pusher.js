@@ -10,16 +10,17 @@ Pusher.log = function(message) {
 // DEFINE USER'S CHANNELS
 //////////////////////////////////////////////////////////////////////////////
 // 'http://d09eb96f1aef0dea4b31:57d70f45d23770529a1e@api.pusherapp.com/apps/51516'
+// var pusher = new Pusher(<%= ENV['d55ecc1d9e47eb42ed12'] %>);
 
-var pusher = new Pusher(<%= ENV['PUSHER_KEY'] %>);
 var usernameWithNoSpaces;
 var myOwnChannel;
 var commonChannel;
 var opponentChannelName;
 var commonChannelName;
 
+var pusher = new Pusher('d55ecc1d9e47eb42ed12');
 establishMyOwnChannel();
-establishCommonChannel();
+establishOpponentChannel();
 
 myOwnChannel.bind('gamebroadcast', function(rawGameboardData) {
   var atOpponentGameboard = rubyRageBattleMode.returnCtxOpponentGameboard();
@@ -73,6 +74,8 @@ myOwnChannel.bind('startCountdownAndGo', function(data) {
   startCountdownAndGo();
 });
 
+
+
 //////////////////////////////////////////////////////////////////////////////
 // BATTLE RELATED EVENTS & FUNCTIONS
 //////////////////////////////////////////////////////////////////////////////
@@ -123,15 +126,15 @@ function establishMyOwnChannel() {
 }
 
 
-function establishCommonChannel() {
-  establishOpponentChannel();
-  if (opponentChannelName < usernameWithNoSpaces) {
-    commonChannelName = opponentChannelName + "_" + usernameWithNoSpaces;
-  } else {
-    commonChannelName = usernameWithNoSpaces + "_" + opponentChannelName;
-  }
-  commonChannel = pusher.subscribe(commonChannelName);
-}
+// function establishCommonChannel() {
+//   establishOpponentChannel();
+//   if (opponentChannelName < usernameWithNoSpaces) {
+//     commonChannelName = opponentChannelName + "_" + usernameWithNoSpaces;
+//   } else {
+//     commonChannelName = usernameWithNoSpaces + "_" + opponentChannelName;
+//   }
+//   commonChannel = pusher.subscribe(commonChannelName);
+// }
 
 function triggerBattleGame(targetPlayerUsername) {
   $.ajax({
