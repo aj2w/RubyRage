@@ -16,7 +16,7 @@ class GamesController < ApplicationController
   #   })
   # end
 
-  def gamebroadcast
+  def multi.gamebroadcast
     opponentChannelName = params[:opponentChannelName]
     mySittingRubymonsPosition = params[:mySittingRubymonsPosition].values
     myFallingRubymonsPosition = params[:myFallingRubymonsPosition].values
@@ -32,7 +32,7 @@ class GamesController < ApplicationController
       })
   end
 
-  def multi/requestBattle
+  def 'multi/requestBattle'
     opponentChannelName = params[:opponentChannelName]
     challengerChannelName = params[:challengerChannelName]
     Pusher[opponentChannelName].trigger('promptRequestPopup', {
