@@ -10,10 +10,7 @@ canvas {
 body{
   text-align: center;
   background: #FF8566;
-  position: relative;
-top:0;
-bottom:0;
-}
+  height: 755px;
 }
 
 .button_users {
@@ -25,11 +22,11 @@ bottom:0;
 
 .left_selection {
   border-right: 3px dashed gray;
-  height: 800px;
+  height: 755px;
 }
 
 .right_selection {
-  height: 800px;
+  height: 755px;
 }
 
 .title {
