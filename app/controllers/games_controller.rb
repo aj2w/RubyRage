@@ -32,7 +32,7 @@ class GamesController < ApplicationController
       })
   end
 
-  def requestBattle, :controller => '/multi'
+  def multi/requestBattle
     opponentChannelName = params[:opponentChannelName]
     challengerChannelName = params[:challengerChannelName]
     Pusher[opponentChannelName].trigger('promptRequestPopup', {
