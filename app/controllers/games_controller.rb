@@ -39,6 +39,7 @@ class GamesController < ApplicationController
       message: "#{@current_user.username} has requested a battle with you!",
       challengerChannelName: challengerChannelName
       })
+    render :nothing => true
   end
 
   def challengeResponse
