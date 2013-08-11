@@ -59,6 +59,11 @@ myOwnChannel.bind('challengeResponse', function(data) {
   }
 });
 
+myOwnChannel.bind('rubyonrage_test', function(data) {
+  alert(data.message);
+});
+
+
 // commonChannel.bind('startCountdownAndGo'), function(data) {
 //   startCountdownAndGo();
 // }
