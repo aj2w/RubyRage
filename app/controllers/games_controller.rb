@@ -7,24 +7,23 @@ class GamesController < ApplicationController
   end
 
   def multi
-    # binding.pry
     @channelname = params[:username]
   end
 
-  def pusher
-    Pusher[params[:username]].trigger('my_event', {
-      message: 'hello world'
-    })
-  end
+  # def pusher
+  #   Pusher[params[:username]].trigger('my_event', {
+  #     message: 'hello world'
+  #   })
+  # end
 
-  def gameBroadcast
+  def gamebroadcast
     opponentChannelName = params[:opponentChannelName]
     mySittingRubymonsPosition = params[:mySittingRubymonsPosition].values
     myFallingRubymonsPosition = params[:myFallingRubymonsPosition].values
     myCurrentXposition        = params[:myCurrentXposition]
     myCurrentYposition        = params[:myCurrentYposition]
     myUpcomingRubymonPair     = params[:myUpcomingRubymonPair]
-    Pusher[opponentChannelName].trigger('gameBroadcast', {
+    Pusher[opponentChannelName].trigger('gamebroadcast', {
       mySittingRubymonsPosition: mySittingRubymonsPosition,
       myFallingRubymonsPosition: myFallingRubymonsPosition,
       myCurrentXposition: myCurrentXposition,
@@ -52,8 +51,18 @@ class GamesController < ApplicationController
     end
     Pusher[opponentChannelName].trigger('challengeResponse', {
       message: messageToChallenger,
-      responseToChallenge: responseToChallenge
+      responseToChallenge: responseToChallenge,
+      opponentChannelName: @current_user.username
     })
+  end
+
+  def triggerBattleGame
+    # commonChannelName = params[:commonChannelName]
+    myOwnChannelName = params[:myOwnChannelName]
+    opponentChannelName = params[:opponentChannelName]
+    binding.pry
+    Pusher[myOwnChannelName].trigger('startCountdownAndGo', {message: "Start game!"})
+    Pusher[opponentChannelName].trigger('startCountdownAndGo', {message: "Start game!"})
   end
 
 end

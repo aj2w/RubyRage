@@ -100,12 +100,6 @@ function newGame() {
   interval = setInterval( tick, tickSpeed );
 }
 
-$('#start-button').click(function(){
-  newGame();
-  setInterval( renderAll, 30 );
-  $('#start-button').hide();
-});
-
 
 //////////////////////////////////////////////////////////////////////////////
 // PART 4: RUBYRAGE GAME LOGIC
