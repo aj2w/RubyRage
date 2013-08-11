@@ -14,6 +14,7 @@ var pusher = new Pusher('<%= Pusher.key %>');
 var username = $('.menubar_user').text();
 var usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
 var myOwnChannel = pusher.subscribe(usernameWithNoSpaces);
+var commonChannelName;
 
 myOwnChannel.bind('gameBroadcast', function(rawGameboardData) {
   var atOpponentGameboard = rubyRageBattleMode.returnCtxOpponentGameboard();
@@ -35,10 +36,13 @@ myOwnChannel.bind('gameBroadcast', function(rawGameboardData) {
 
 myOwnChannel.bind('promptRequestPopup', function(data) {
   var response = confirm(data.message);
+  var battleGameUrl = '/games/multi/' + data.challengerChannelName;
+  var redirectCommand = "window.location.href = '" + battleGameUrl + "';"
+  // var commonChannelCommand = "establishCommonChannel(" + data.challengerChannelName + ");";
   if (response == true) {
-    window.location = '/games/multi/' + data.challengerChannelName;
+    setTimeout(redirectCommand, 50);
+    // setTimeout(commonChannelCommand, 500);
     challengeResponse(true, data.challengerChannelName);
-    // window.location.replace('/games/multi/' + data.challengerChannelName);
   } else {
     challengeResponse(false, data.challengerChannelName);
   }
@@ -108,13 +112,18 @@ function challengeResponse(answer, challengerUsername) {
   })
 }
 
-function returnCommonChannel(opponentChannelName) {
-  var commonChannelName;
+function establishCommonChannel() {
   if (opponentChannelName < usernameWithNoSpaces) {
     commonChannelName = opponentChannelName + "_" + usernameWithNoSpaces;
-    return commonChannelName;
   } else {
     commonChannelName = usernameWithNoSpaces + "_" + opponentChannelName;
-    return commonChannelName;
   }
 }
+
+$(window).load(function() {
+  establishCommonChannel();
+});
+
+
+
+
