@@ -1,10 +1,10 @@
 
 // Enable pusher logging - don't include this in production
-Pusher.log = function(message) {
-  if (window.console && window.console.log) {
-    window.console.log(message);
-  }
-};
+// Pusher.log = function(message) {
+//   if (window.console && window.console.log) {
+//     window.console.log(message);
+//   }
+// };
 
 //////////////////////////////////////////////////////////////////////////////
 // DEFINE USER'S CHANNELS
@@ -17,7 +17,7 @@ var commonChannel;
 var opponentChannelName;
 var commonChannelName;
 
-establishMyOwnChannel();
+establishMyOwnChannel(); //defined usernamewithnospaces
 establishCommonChannel();
 
 myOwnChannel.bind('gamebroadcast', function(rawGameboardData) {
