@@ -8,7 +8,6 @@ describe GamesController do
       expect(response.status).to eq(200)
     end
 
-
     it "renders the dashboard template" do
       get :dashboard
       expect(response).to render_template("dashboard")
