@@ -60,7 +60,6 @@ class GamesController < ApplicationController
     # commonChannelName = params[:commonChannelName]
     myOwnChannelName = params[:myOwnChannelName]
     opponentChannelName = params[:opponentChannelName]
-    binding.pry
     Pusher[myOwnChannelName].trigger('startCountdownAndGo', {message: "Start game!"})
     Pusher[opponentChannelName].trigger('startCountdownAndGo', {message: "Start game!"})
   end
