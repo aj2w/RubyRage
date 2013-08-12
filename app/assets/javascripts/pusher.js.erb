@@ -46,7 +46,7 @@ myOwnChannel.bind('promptRequestPopup', function(data) {
   var battleGameUrl = '/games/multi/' + data.challengerChannelName;
   var redirectCommand = "window.location.href = '" + battleGameUrl + "';"
   if (response == true) {
-    setTimeout(redirectCommand, 50);
+    setTimeout(redirectCommand, 1000);
     challengeResponse(true, data.challengerChannelName);
   } else {
     challengeResponse(false, data.challengerChannelName);
