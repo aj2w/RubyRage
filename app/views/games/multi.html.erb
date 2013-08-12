@@ -38,7 +38,7 @@
   var opponentChannelName;
   var commonChannelName;
 
-  var pusher = new Pusher('d55ecc1d9e47eb42ed12');
+  var pusher = new Pusher(<%= ENV['PUSHER_KEY'] %>);
   establishMyOwnChannel();
   establishOpponentChannel();
 
