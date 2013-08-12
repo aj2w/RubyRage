@@ -4,7 +4,7 @@
 }
 
 canvas {
-  border: 5px solid #CC6A52;
+  border: 5px solid #890043;
   margin-top: 60px;
 }
 
@@ -12,11 +12,11 @@ canvas {
   display: none;
 }
 
-/*body{
+body{
   text-align: center;
-  background: #FF8566;
-  height: 755px;
-}*/
+  /*background: #FF8566;*/
+  height: 1000px;
+}
 
 
 .button_users {
@@ -35,17 +35,17 @@ canvas {
   height: 755px;
 }
 
-.title {
+.big-ass-text {
   font-family: 'brush_strokes', cursive;
-  font-size: 80px;
+  font-size: 140px;
 }
 
 nav.top-bar {
-  background: #CC6A52;
+  background: #890043;
 }
 
 .right_bar {
-  background: #CC6A52;
+  background: #890043;
 }
 
 .top-bar {
@@ -61,12 +61,12 @@ nav.top-bar {
 }
 
 .top-bar-section li a:not(.button) {
-  background: #CC6A52;
+  background: #890043;
 }
 
 .top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"] {
-  border-left: #CC6A52;
-  border-right: #CC6A52;
+  border-left: #890043;
+  border-right: #890043;
 }
 
 #rubymon-set {
@@ -82,7 +82,7 @@ nav.top-bar {
 }*/
 
 .list_of_users {
-  background: #FF8566;
+  /*background: #FF8566;*/
   border: none;
   text-align: center;
 }

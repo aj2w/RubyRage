@@ -465,9 +465,9 @@ function renderNextRubymons() {
 }
 
 function paintOverGameboardAndPrewview() {
-  ctxGameboard.fillStyle = 'lightgrey';
+  ctxGameboard.fillStyle = '#f6dfe9';
   ctxGameboard.fillRect( 0, 0, gameboardWitdh, gameboardHeight );
-  ctxPreview.fillStyle = 'lightblue';
+  ctxPreview.fillStyle = '#f6dfe9';
   ctxPreview.fillRect( 0, 0, previewWitdh, previewdHeight );
 }
 
@@ -523,9 +523,9 @@ var rubyRageBattleMode = {
     }
   },
   paintOverOpponents: function(ctxObjectGameboard, ctxObjectPreview) {
-    ctxObjectGameboard.fillStyle = 'lightgrey';
+    ctxObjectGameboard.fillStyle = '#f6dfe9';
     ctxObjectGameboard.fillRect( 0, 0, gameboardWitdh, gameboardHeight );
-    ctxObjectPreview.fillStyle = 'lightblue';
+    ctxObjectPreview.fillStyle = '#f6dfe9';
     ctxObjectPreview.fillRect( 0, 0, previewWitdh, previewdHeight );
   }
 };
