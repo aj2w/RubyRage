@@ -38,6 +38,8 @@ Rubyrage::Application.configure do
   # config.assets.debug = true # CHANGED TO FALSE TO TEST
   config.assets.debug = true
 
+
+
   # Pusher.app_id = '51516'
   # Pusher.key    = 'd09eb96f1aef0dea4b31'
   # Pusher.secret = '57d70f45d23770529a1e'

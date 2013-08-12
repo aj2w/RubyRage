@@ -1,16 +1,17 @@
 
 // Enable pusher logging - don't include this in production
-Pusher.log = function(message) {
-  if (window.console && window.console.log) {
-    window.console.log(message);
-  }
-};
+// Pusher.log = function(message) {
+//   if (window.console && window.console.log) {
+//     window.console.log(message);
+//   }
+// };
 
 //////////////////////////////////////////////////////////////////////////////
 // DEFINE USER'S CHANNELS
 //////////////////////////////////////////////////////////////////////////////
 // 'http://d09eb96f1aef0dea4b31:57d70f45d23770529a1e@api.pusherapp.com/apps/51516'
-// var pusher = new Pusher(<%= ENV['d55ecc1d9e47eb42ed12'] %>);
+
+var pusher;
 
 var usernameWithNoSpaces;
 var myOwnChannel;
@@ -18,7 +19,6 @@ var commonChannel;
 var opponentChannelName;
 var commonChannelName;
 
-// var pusherKeycode = "'" + <%= ENV['PUSHER_KEY'].to_s %> + "'";
 var pusher = new Pusher('d55ecc1d9e47eb42ed12');
 establishMyOwnChannel();
 establishOpponentChannel();
@@ -95,7 +95,7 @@ function startSendingRequest() {
   })
 }
 
-function requestBattle(targetPlayerUsername) {
+function requestBattle(targetPlayerUsername, usernameWithNoSpaces) {
   $.ajax({
     url: "/games/multi/requestBattle",
     type: "post",
@@ -121,21 +121,22 @@ function establishOpponentChannel() {
 }
 
 function establishMyOwnChannel() {
+  var pusher = new Pusher('d09eb96f1aef0dea4b31');
   var username = $('.menubar_user').text();
-  usernameWithNoSpaces = username.replace(/^\s+|\s+$/g, "");
-  myOwnChannel = pusher.subscribe(usernameWithNoSpaces);
+  usernameWithNoSpaces = this.username.replace(/^\s+|\s+$/g, "");
+  myOwnChannel = this.pusher.subscribe(usernameWithNoSpaces);
+  return myOwnChannel;
 }
 
-
-// function establishCommonChannel() {
-//   establishOpponentChannel();
-//   if (opponentChannelName < usernameWithNoSpaces) {
-//     commonChannelName = opponentChannelName + "_" + usernameWithNoSpaces;
-//   } else {
-//     commonChannelName = usernameWithNoSpaces + "_" + opponentChannelName;
-//   }
-//   commonChannel = pusher.subscribe(commonChannelName);
-// }
+function establishCommonChannel() {
+  establishOpponentChannel();
+  if (opponentChannelName < usernameWithNoSpaces) {
+    commonChannelName = opponentChannelName + "_" + usernameWithNoSpaces;
+  } else {
+    commonChannelName = usernameWithNoSpaces + "_" + opponentChannelName;
+  }
+  commonChannel = pusher.subscribe(commonChannelName);
+}
 
 function triggerBattleGame(targetPlayerUsername) {
   $.ajax({
