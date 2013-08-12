@@ -15,5 +15,4 @@
 //= require pusher.js
 //= require rubyrage.js
 //= require foundation.dropdown.js
-//= require_tree .
 
