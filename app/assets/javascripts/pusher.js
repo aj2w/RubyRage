@@ -115,6 +115,7 @@ function establishMyOwnChannel() {
   var username = $('.menubar_user').text();
   usernameWithNoSpaces = this.username.replace(/^\s+|\s+$/g, "");
   myOwnChannel = this.pusher.subscribe(usernameWithNoSpaces);
+  return myOwnChannel;
 }
 
 function establishCommonChannel() {
