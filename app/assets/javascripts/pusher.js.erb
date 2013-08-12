@@ -85,7 +85,7 @@ function startSendingRequest() {
   })
 }
 
-function requestBattle(targetPlayerUsername) {
+function requestBattle(targetPlayerUsername, usernameWithNoSpaces) {
   $.ajax({
     url: "/games/multi/requestBattle",
     type: "post",
