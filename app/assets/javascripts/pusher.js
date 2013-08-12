@@ -117,7 +117,6 @@ function establishMyOwnChannel() {
   myOwnChannel = this.pusher.subscribe(usernameWithNoSpaces);
 }
 
-
 function establishCommonChannel() {
   establishOpponentChannel();
   if (opponentChannelName < usernameWithNoSpaces) {

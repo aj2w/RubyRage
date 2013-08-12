@@ -17,7 +17,7 @@ class GamesController < ApplicationController
   # end
 
   def gamebroadcast
-    opponentChannelName = params[:opponentChannelName]
+    opponentChannelName       = params[:opponentChannelName]
     mySittingRubymonsPosition = params[:mySittingRubymonsPosition].values
     myFallingRubymonsPosition = params[:myFallingRubymonsPosition].values
     myCurrentXposition        = params[:myCurrentXposition]
@@ -59,7 +59,7 @@ class GamesController < ApplicationController
     respond_to do |format|
       json_response = Pusher[opponentChannelName].trigger('promptRequestPopup', {
         message: "#{@current_user.username} has requested a battle with you!",
-        challengerChannelName: challengerChannelName
+        challengerChannelName: @current_user.username
       })
       format.json { render :json => json_response }
     end
